@@ -1,0 +1,12 @@
+type Todo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nroguia: String
+  rutcliente: String
+  estado: String
+  pesototal: String
+  cliente: String
+  fechadespacho: String
+  nrobultos: String
+  producto: String
+}
+ 
