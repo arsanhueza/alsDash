@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div style={styles.container}>
-      <h2>Amplify Todos</h2>
+      <h2>Datos Guías</h2>
       <input
         onChange={event => setInput('nroguia', event.target.value)}
         style={styles.input}
@@ -56,7 +56,7 @@ const App = () => {
         value={formState.rutcliente}
         placeholder="RutCliente"
       />
-      <button style={styles.button} onClick={addTodo}>Create Todo</button>
+      <button style={styles.button} onClick={addTodo}>Ingresar Guia</button>
       {
         todos.map((todo, index) => (
           <div key={todo.id ? todo.id : index} style={styles.todo}>
