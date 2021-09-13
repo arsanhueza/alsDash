@@ -1,0 +1,197 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type ModelTodoConnection @aws_api_key @aws_iam {
+  items: [Todo]
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+type Mutation {
+  createTodo(condition: ModelTodoConditionInput, input: CreateTodoInput!): Todo @aws_api_key @aws_iam
+  deleteTodo(condition: ModelTodoConditionInput, input: DeleteTodoInput!): Todo @aws_api_key @aws_iam
+  updateTodo(condition: ModelTodoConditionInput, input: UpdateTodoInput!): Todo @aws_api_key @aws_iam
+}
+
+type Query {
+  getTodo(id: ID!): Todo @aws_api_key @aws_iam
+  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection @aws_api_key @aws_iam
+  syncTodos(filter: ModelTodoFilterInput, lastSync: AWSTimestamp, limit: Int, nextToken: String): ModelTodoConnection @aws_api_key @aws_iam
+}
+
+type Subscription {
+  onCreateTodo: Todo @aws_api_key @aws_iam @aws_subscribe(mutations : ["createTodo"])
+  onDeleteTodo: Todo @aws_api_key @aws_iam @aws_subscribe(mutations : ["deleteTodo"])
+  onUpdateTodo: Todo @aws_api_key @aws_iam @aws_subscribe(mutations : ["updateTodo"])
+}
+
+type Todo @aws_api_key @aws_iam {
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  _version: Int!
+  cliente: String
+  createdAt: AWSDateTime!
+  estado: String
+  fechadespacho: String
+  id: ID!
+  nrobultos: String
+  nroguia: String
+  pesototal: String
+  producto: String
+  rutcliente: String
+  updatedAt: AWSDateTime!
+}
+
+enum ModelAttributeTypes {
+  _null
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input CreateTodoInput {
+  _version: Int
+  cliente: String
+  estado: String
+  fechadespacho: String
+  id: ID
+  nrobultos: String
+  nroguia: String
+  pesototal: String
+  producto: String
+  rutcliente: String
+}
+
+input DeleteTodoInput {
+  _version: Int
+  id: ID!
+}
+
+input ModelBooleanInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelFloatInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+}
+
+input ModelIDInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelSizeInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelStringInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  size: ModelSizeInput
+}
+
+input ModelTodoConditionInput {
+  and: [ModelTodoConditionInput]
+  cliente: ModelStringInput
+  estado: ModelStringInput
+  fechadespacho: ModelStringInput
+  not: ModelTodoConditionInput
+  nrobultos: ModelStringInput
+  nroguia: ModelStringInput
+  or: [ModelTodoConditionInput]
+  pesototal: ModelStringInput
+  producto: ModelStringInput
+  rutcliente: ModelStringInput
+}
+
+input ModelTodoFilterInput {
+  and: [ModelTodoFilterInput]
+  cliente: ModelStringInput
+  estado: ModelStringInput
+  fechadespacho: ModelStringInput
+  id: ModelIDInput
+  not: ModelTodoFilterInput
+  nrobultos: ModelStringInput
+  nroguia: ModelStringInput
+  or: [ModelTodoFilterInput]
+  pesototal: ModelStringInput
+  producto: ModelStringInput
+  rutcliente: ModelStringInput
+}
+
+input UpdateTodoInput {
+  _version: Int
+  cliente: String
+  estado: String
+  fechadespacho: String
+  id: ID!
+  nrobultos: String
+  nroguia: String
+  pesototal: String
+  producto: String
+  rutcliente: String
+}
