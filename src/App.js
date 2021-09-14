@@ -15,10 +15,11 @@ const App = () => {
     fetchTodos()
   }, [])
 
-
-
   async function fetchTodos() {
     try {
+     // const todoData = await API.graphql(
+     //            graphqlOperation(queries.listTodos, { filter: { title: { contains: title } } })
+     //          )
       const todoData = await API.graphql(graphqlOperation(listTodos))
       const todos = todoData.data.listTodos.items
       setTodos(todos)
@@ -43,19 +44,21 @@ const App = () => {
         <th>Cliente</th>
         <th>Nro Bultos</th>
         <th>FechaDespacho</th>
+        <th>Productos</th>
     </tr>
     </thead>
     <tbody>
-      {todos.map((user, id) =>
+      {todos.map((todo, id) =>
         <tr key={id}>
-          <td>{id}</td>
-          <td>{user.rutcliente}</td>
-          <td>{user.nroguia}</td>
-          <td>{user.estado}</td>
-          <td>{user.pesototal}</td>
-          <td>{user.cliente}</td>
-          <td>{user.nrobultos}</td>
-          <td>{user.fechadespacho}</td>
+          <td>{id + 1}</td>
+          <td>{todo.rutcliente}</td>
+          <td>{todo.nroguia}</td>
+          <td>{todo.estado}</td>
+          <td>{todo.pesototal}</td>
+          <td>{todo.cliente}</td>
+          <td>{todo.nrobultos}</td>
+          <td>{todo.fechadespacho}</td>
+          <td>{todo.producto}</td>
         </tr>
       )}
     </tbody>
