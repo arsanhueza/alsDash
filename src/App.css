@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.box {
+  padding: 10px;
+}
+
+table {
+  background-color: white;
+}
+
+thead {
+  background-color: grey;
+}
+
+tr:nth-child(even) {
+  background-color: lightgrey;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

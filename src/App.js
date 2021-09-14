@@ -38,14 +38,18 @@ const App = () => {
         <th>id</th>
         <th>Rut Cliente</th>
         <th>Nro Guia</th>
+        <th>Estado</th>
+
       </tr>
     </thead>
     <tbody>
       {todos.map((user, id) =>
         <tr key={id}>
-          <td>{id}</td>
+          <td>{id + 1}</td>
           <td>{user.rutcliente}</td>
           <td>{user.nroguia}</td>
+          <td>{user.estado}</td>
+
         </tr>
       )}
     </tbody>
@@ -60,7 +64,7 @@ const App = () => {
 
 const styles = {
   container: { width: 2000, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 },
-  todo: {  marginBottom: 15 },
+  todo: {  marginBottom: 200 },
   input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
   todoName: { fontSize: 20, fontWeight: 'bold' },
   todoDescription: { marginBottom: 0 },
