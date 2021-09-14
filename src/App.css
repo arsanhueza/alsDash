@@ -11,11 +11,11 @@ table {
 }
 
 thead {
-  background-color: grey;
+  background-color: lightblue;
 }
 
 tr:nth-child(even) {
-  background-color: lightgrey;
+  background-color: lightblue;
 }
 
 .App-logo {
