@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from './graphql/mutations'
 import { listTodos } from './graphql/queries'
 import awsExports from "./aws-exports";
 import './App.css';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import TableScrollbar from 'react-table-scrollbar';
-import randomusers from './data.js';
 
 Amplify.configure(awsExports);
 
-const initialState = { nroguia: '', rutcliente: '' }
-
 const App = () => {
-  const [formState, setFormState] = useState(initialState)
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
     fetchTodos()
   }, [])
 
-  function setInput(key, value) {
-    setFormState({ ...formState, [key]: value })
-  }
+
 
   async function fetchTodos() {
     try {
@@ -32,17 +25,7 @@ const App = () => {
     } catch (err) { console.log('error fetching todos') }
   }
 
-  async function addTodo() {
-    try {
-      if (!formState.nroguia || !formState.rutcliente) return
-      const todo = { ...formState }
-      setTodos([...todos, todo])
-      setFormState(initialState)
-      await API.graphql(graphqlOperation(createTodo, {input: todo}))
-    } catch (err) {
-      console.log('error creating todo:', err)
-    }
-  }
+
 
   return (
     <div style={styles.container}>
