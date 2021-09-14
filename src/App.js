@@ -42,13 +42,13 @@ const App = () => {
         <th>Peso Total</th>
         <th>Cliente</th>
         <th>Nro Bultos</th>
-        <th>Fecha Despacho</th>
+        <th>Despacho</th>
     </tr>
     </thead>
     <tbody>
       {todos.map((user, id) =>
         <tr key={id}>
-          <td>{id}</td>
+          <td>{id + 1}</td>
           <td>{user.rutcliente}</td>
           <td>{user.nroguia}</td>
           <td>{user.estado}</td>
