@@ -29,11 +29,9 @@ const App = () => {
 
   return (
     <div style={styles.container}>
-      <h2>Datos Guías</h2>
-          <div className="App">
-          <div className="box">
-
-        <TableScrollbar> 
+    <h2>Datos Guías</h2>
+    <div className="App">
+      <TableScrollbar> 
           {  <table>
     <thead>
       <tr>
@@ -45,9 +43,7 @@ const App = () => {
         <th>Cliente</th>
         <th>Nro Bultos</th>
         <th>Fecha Despacho</th>
-
-
-      </tr>
+    </tr>
     </thead>
     <tbody>
       {todos.map((user, id) =>
@@ -67,14 +63,13 @@ const App = () => {
         </TableScrollbar>
       </div>
     </div>
-      </div>
-  )
+      )
 }
 
 
 
 const styles = {
-  container: { width: 2000, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 }
+  container: { width: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 }
 }
 
 
