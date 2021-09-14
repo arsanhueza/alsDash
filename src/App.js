@@ -31,7 +31,9 @@ const App = () => {
     <div style={styles.container}>
       <h2>Datos Guías</h2>
           <div className="App">
-        <TableScrollbar>
+          <div className="box">
+
+        <TableScrollbar> 
           {  <table>
     <thead>
       <tr>
@@ -39,17 +41,25 @@ const App = () => {
         <th>Rut Cliente</th>
         <th>Nro Guia</th>
         <th>Estado</th>
+        <th>Peso Total</th>
+        <th>Cliente</th>
+        <th>Nro Bultos</th>
+        <th>Fecha Despacho</th>
+
 
       </tr>
     </thead>
     <tbody>
       {todos.map((user, id) =>
         <tr key={id}>
-          <td>{id + 1}</td>
+          <td>{id}</td>
           <td>{user.rutcliente}</td>
           <td>{user.nroguia}</td>
           <td>{user.estado}</td>
-
+          <td>{user.pesototal}</td>
+          <td>{user.cliente}</td>
+          <td>{user.nrobultos}</td>
+          <td>{user.fechadespacho}</td>
         </tr>
       )}
     </tbody>
@@ -57,18 +67,14 @@ const App = () => {
         </TableScrollbar>
       </div>
     </div>
+      </div>
   )
 }
 
 
 
 const styles = {
-  container: { width: 2000, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 },
-  todo: {  marginBottom: 200 },
-  input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
-  todoName: { fontSize: 20, fontWeight: 'bold' },
-  todoDescription: { marginBottom: 0 },
-  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
+  container: { width: 2000, margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 20 }
 }
 
 
