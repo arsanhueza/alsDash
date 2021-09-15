@@ -7,9 +7,8 @@ function App() {
   return (
     <div className="app">
       <Home />
-      <AmplifySignOut />
+      <AmplifySignOut buttonText="Cerrar Sesión"></AmplifySignOut>
     </div>
   );
 }
-
 export default withAuthenticator(App, true);
