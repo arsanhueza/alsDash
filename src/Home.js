@@ -44,14 +44,14 @@ const Home = () => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell >Nro Guía</TableCell>
+                                <TableCell >Numero de Guía</TableCell>
                                 <TableCell >Rut Cliente</TableCell>
-                                <TableCell align="right">Estado</TableCell>
-                                <TableCell align="center">Peso Total</TableCell>
-                                <TableCell align="left">Cliente</TableCell>
-                                <TableCell >Fecha Despacho</TableCell>
-                                <TableCell >Nro Bultos</TableCell>
-                                <TableCell >producto</TableCell>
+                                <TableCell >Estado</TableCell>
+                                <TableCell >Peso Total</TableCell>
+                                <TableCell >Cliente</TableCell>
+                                <TableCell >Fecha de Despacho</TableCell>
+                                <TableCell >Numero de Bultos</TableCell>
+                                <TableCell >Producto</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -61,7 +61,7 @@ const Home = () => {
                                         {row?.nroguia}
                                     </TableCell>
                                     <TableCell >{row?.rutcliente}</TableCell>
-                                    <TableCell align="right">{row?.estado}</TableCell>
+                                    <TableCell >{row?.estado}</TableCell>
                                     <TableCell >{row?.pesototal}</TableCell>
                                     <TableCell >{row?.cliente}</TableCell>
                                     <TableCell >{row?.fechadespacho}</TableCell>
