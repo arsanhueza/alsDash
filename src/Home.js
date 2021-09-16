@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { listTodos } from './graphql/queries'
 import Table from '@material-ui/core/Table';
@@ -10,13 +10,33 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
 import awsExports from "./aws-exports";
+
 Amplify.configure(awsExports);
+
 
 const Home = () => {
     const [todos, setTodos] = useState([])
     const [formState, setFormState] = useState({ nroguia: '', rutcliente: '', estado: '', pesototal: '', cliente: '' ,fechadespacho: '', nrobultos: '', producto: ''})
+
+
+    const StyledTableCell = withStyles((theme) => ({
+      head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+      },
+      body: {
+        fontSize: 14,
+      },
+    }))(TableCell);
+
+    const StyledTableRow = withStyles((theme) => ({
+      root: {
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
+        },
+      },
+    }))(TableRow);
 
 
     useEffect(() => {
@@ -36,22 +56,29 @@ const Home = () => {
         value = (isNumber) ? parseInt(value) : value;
         setFormState({ ...formState, [key]: value })
     }
+    const useStyles = makeStyles({
+      table: {
+        minWidth: 700,
+      },
+    });
+    const classes = useStyles();
 
     return (
+
         <div className="home">
             <div className="home__table">
                 <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
+                <Table className={classes.table} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <TableCell >Numero de Guía</TableCell>
-                                <TableCell >Rut Cliente</TableCell>
-                                <TableCell >Estado</TableCell>
-                                <TableCell >Peso Total</TableCell>
-                                <TableCell >Cliente</TableCell>
-                                <TableCell >Fecha de Despacho</TableCell>
-                                <TableCell >Numero de Bultos</TableCell>
-                                <TableCell >Producto</TableCell>
+                                <StyledTableCell >Numero de Guía</StyledTableCell>
+                                <StyledTableCell >Rut Cliente</StyledTableCell>
+                                <StyledTableCell >Estado</StyledTableCell>
+                                <StyledTableCell >Peso Total</StyledTableCell>
+                                <StyledTableCell >Cliente</StyledTableCell>
+                                <StyledTableCell >Fecha de Despacho</StyledTableCell>
+                                <StyledTableCell >Numero de Bultos</StyledTableCell>
+                                <StyledTableCell >Producto</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -78,3 +105,35 @@ const Home = () => {
 }
 
 export default Home;
+
+
+//
+//   return (
+//     <TableContainer component={Paper}>
+//       <Table className={classes.table} size="small" aria-label="a dense table">
+//         <TableHead>
+//           <TableRow>
+//             <TableCell>Dessert (100g serving)</TableCell>
+//             <TableCell align="right">Calories</TableCell>
+//             <TableCell align="right">Fat&nbsp;(g)</TableCell>
+//             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+//             <TableCell align="right">Protein&nbsp;(g)</TableCell>
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {rows.map((row) => (
+//             <TableRow key={row.name}>
+//               <TableCell component="th" scope="row">
+//                 {row.name}
+//               </TableCell>
+//               <TableCell align="right">{row.calories}</TableCell>
+//               <TableCell align="right">{row.fat}</TableCell>
+//               <TableCell align="right">{row.carbs}</TableCell>
+//               <TableCell align="right">{row.protein}</TableCell>
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+//     </TableContainer>
+//   );
+// }
