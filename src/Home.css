@@ -3,9 +3,30 @@
   }
 
 
+<<<<<<< HEAD
 .home__table{
     width: auto;
     margin-right: 20px;
     margin-left: 400px;
     margin-top: 0px;
+=======
+  .home__table{
+    width: 1000px;
+    margin-right: 10px;
+    margin-top: 30px;
+
+  }
+
+  .app__input{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      flex: wrap;
+      max-width: 1200px;
+      border-radius: 10px;
+  }
+
+  .app__input > input {
+      margin-right: 10px;
+>>>>>>> parent of 3afc383... menu lateral en bruto
   }
