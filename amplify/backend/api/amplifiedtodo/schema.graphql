@@ -8,5 +8,7 @@ type Todo @model @auth(rules: [{allow: public}]) {
   fechadespacho: String
   nrobultos: String
   producto: String
+  turno: String
+  nave: String
 }
  

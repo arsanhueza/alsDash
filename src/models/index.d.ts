@@ -18,6 +18,8 @@ export declare class Todo {
   readonly fechadespacho?: string;
   readonly nrobultos?: string;
   readonly producto?: string;
+  readonly turno?: string;
+  readonly nave?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Todo, TodoMetaData>);

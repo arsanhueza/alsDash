@@ -66,6 +66,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "turno": {
+                    "name": "turno",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "nave": {
+                    "name": "nave",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -111,5 +125,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "1d0a18eb16a969f53771a87862c37cfc"
+    "version": "5ae223a520abbec23cdde5b9b9a7796c"
 };
