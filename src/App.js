@@ -10,7 +10,7 @@ import Layout from './containers/Layout/Layout';
 import {ThemeProvider} from '@material-ui/core/styles'
 import theme from './config/themeConfig'
 import Amplify from 'aws-amplify';
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator,withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
 import awsExports from "./aws-exports";
 
@@ -44,15 +44,12 @@ const plugins = [
 
 const App = () => {
   return (
-    <AmplifyAuthenticator>
-   	<ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <UIRouter plugins={plugins} states={states}>
         <Layout />
       </UIRouter>
-    </ThemeProvider> 
-    </AmplifyAuthenticator>
-
+    </ThemeProvider>
   )
 }
 
-export default App;
+export default withAuthenticator(App,true);
