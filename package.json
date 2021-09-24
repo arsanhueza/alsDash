@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@uirouter/react": "^1.0.7",
     "aws-amplify": "^4.3.0",
+    "npm": "^7.24.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
