@@ -16,9 +16,11 @@
     "@testing-library/user-event": "^12.1.10",
     "@uirouter/react": "^1.0.7",
     "aws-amplify": "^4.3.0",
+    "json2csv": "^5.0.6",
     "npm": "^7.24.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-json-to-csv": "^1.0.4",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },

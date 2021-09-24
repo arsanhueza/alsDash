@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Todo } from '../../models';
+import json2csv from "json2csv";
 
 async function downloadContent(name, content) {
 	var atag = document.createElement("a");
@@ -11,14 +12,17 @@ async function downloadContent(name, content) {
 }
 const Exportar = () => {
 	const [todos] = useState([])
-
 	useEffect(() => {
         fetchTodos()
 
     }, [])
 	const fetchTodos = async () => {
 		const todos = await DataStore.query(Todo);
-		downloadContent("dato.json",JSON.stringify(todos));
+		const json2csv = require('json2csv').parse;
+		const csv = json2csv(todos, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','createdAt', 'updatedAt', '_version','_lastChangedAt', '_deleted']);
+		downloadContent("datos.csv",csv);
+
+
 	}
 	return (
 		<div >
