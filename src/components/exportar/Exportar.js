@@ -21,8 +21,6 @@ const Exportar = () => {
 		const json2csv = require('json2csv').parse;
 		const csv = json2csv(todos, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','createdAt', 'updatedAt', '_version','_lastChangedAt', '_deleted']);
 		downloadContent("datos.csv",csv);
-
-
 	}
 	return (
 		<div >

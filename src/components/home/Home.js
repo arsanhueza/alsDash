@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import { withStyles} from '@material-ui/styles';
 import { DataStore } from '@aws-amplify/datastore';
 import { Todo } from '../../models';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.head}`]: {
+    fontSize: 16,
+  },
+}));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.focus,
+  },
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
-const Home = () => {
+export default function Home() {
     const [todos, setTodos] = useState([])
     const [formState, setFormState] = useState({ nroguia: '', rutcliente: '', estado: '', pesototal: '', cliente: '' ,fechadespacho: '', nrobultos: '', producto: '', nave: '', turno: ''})
-
-    const StyledTableCell = withStyles((theme) => ({
-      head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-      },
-      body: {
-        fontSize: 14,
-      },
-    }))(TableCell);
-
-    const StyledTableRow = withStyles((theme) => ({
-      root: {
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-      },
-    }))(TableRow);
-
 
     useEffect(() => {
         fetchTodos()
@@ -55,36 +53,35 @@ const Home = () => {
         <div className="home">
             <div className="home__table">
                 <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
+                    <Table aria-label="customized table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell >Guía</TableCell>
-                                <TableCell >Rut de Cliente</TableCell>
-                                <TableCell >Estado</TableCell>
-                                <TableCell >Peso Total</TableCell>
-                                <TableCell >Cliente</TableCell>
-                                <TableCell >Fecha de Despacho</TableCell>
-                                <TableCell >Nro de Bultos</TableCell>
-                                <TableCell >Producto</TableCell>
-                                <TableCell >Nave</TableCell>
-                                <TableCell >Turno</TableCell>
-
-                            </TableRow>
+                            <StyledTableRow>
+                                <StyledTableCell >Guía</StyledTableCell>
+                                <StyledTableCell >Rut de Cliente</StyledTableCell>
+                                <StyledTableCell >Estado</StyledTableCell>
+                                <StyledTableCell >Peso Total</StyledTableCell>
+                                <StyledTableCell >Cliente</StyledTableCell>
+                                <StyledTableCell >Fecha de Despacho</StyledTableCell>
+                                <StyledTableCell >Nro de Bultos</StyledTableCell>
+                                <StyledTableCell >Producto</StyledTableCell>
+                                <StyledTableCell >Nave</StyledTableCell>
+                                <StyledTableCell >Turno</StyledTableCell>
+                            </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {todos.map((row) => (
-                          <TableRow key={row.name}>
-                                    <TableCell component="th" scope="row">{row.nroguia}</TableCell>
-                                    <TableCell >{row.rutcliente}</TableCell>
-                                    <TableCell >{row.estado}</TableCell>
-                                    <TableCell >{row.pesototal}</TableCell>
-                                    <TableCell >{row.cliente}</TableCell>
-                                    <TableCell >{row.fechadespacho}</TableCell>
-                                    <TableCell >{row.nrobultos}</TableCell>
-                                    <TableCell >{row.producto}</TableCell>
-                                    <TableCell >{row.nave}</TableCell>
-                                    <TableCell >{row.turno}</TableCell>
-                                </TableRow>
+                              <TableRow key={row.nroguia}>
+                              <TableCell >{row.rutcliente}</TableCell>
+                              <TableCell >{row.rutcliente}</TableCell>
+                              <TableCell >{row.estado}</TableCell>
+                              <TableCell >{row.pesototal}</TableCell>
+                              <TableCell >{row.cliente}</TableCell>
+                              <TableCell >{row.fechadespacho}</TableCell>
+                              <TableCell >{row.nrobultos}</TableCell>
+                              <TableCell >{row.producto}</TableCell>
+                              <TableCell >{row.nave}</TableCell>
+                              <TableCell >{row.turno}</TableCell>
+                              </TableRow>
                             ))}
                         </TableBody>
                     </Table>
@@ -94,4 +91,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+// export default Home;

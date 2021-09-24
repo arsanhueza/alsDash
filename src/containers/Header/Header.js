@@ -17,7 +17,7 @@ const useStyle = makeStyles(theme => ({
 			}
 		},
 	  title: {
-		flexGrow: 1	 
+		flexGrow: 1
 	  },
 	  appBar: {
 		[600]: {
@@ -35,9 +35,9 @@ const Header = (props) => {
 	return (
 		<AppBar className={classes.appBar}>
 			<Toolbar>
-				<IconButton 
-				 color="inherit" 
-				 aria-label="menu" 
+				<IconButton
+				 color="inherit"
+				 aria-label="menu"
 				 className={classes.menuButton}
 				 onClick={() => props.openAction()}>
 					<MenuIcon/>
@@ -53,13 +53,3 @@ const Header = (props) => {
 }
 
 export default Header
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@ import { UIView } from '@uirouter/react';
 import SideBar from '../SideBar/index';
 import { makeStyles } from '@material-ui/styles';
 import {Hidden} from '@material-ui/core'
-import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 
 
 //styles
@@ -19,14 +19,14 @@ const styles = makeStyles(theme => ({
 	},
     content:{
         flexGrow: 1,
-		backGroundColor: blue,
+		backGroundColor: red,
 		padding: '24px'
 	}
-  
+
 }))
 
 const Layout = () => {
-	
+
 	//styles
 	const classes = styles()
 
@@ -55,8 +55,8 @@ const Layout = () => {
 			</div>
 
 		 </div>
-	
-			
+
+
 	)
   }
 
