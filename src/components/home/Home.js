@@ -71,7 +71,7 @@ export default function Home() {
                         <TableBody>
                             {todos.map((row) => (
                               <TableRow key={row.nroguia}>
-                              <TableCell >{row.rutcliente}</TableCell>
+                              <TableCell >{row.nroguia}</TableCell>
                               <TableCell >{row.rutcliente}</TableCell>
                               <TableCell >{row.estado}</TableCell>
                               <TableCell >{row.pesototal}</TableCell>
