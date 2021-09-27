@@ -25,7 +25,7 @@ const Exportar = () => {
 	return (
 		<div >
 			<br />
-			<h1>Espere la descarga</h1>
+			<h1>Espere la descarga...</h1>
 		</div>
 	)
   }

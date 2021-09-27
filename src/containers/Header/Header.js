@@ -34,6 +34,19 @@ const Header = (props) => {
 
 	return (
 		<AppBar className={classes.appBar}>
+			<Toolbar>
+				<IconButton
+				 color="inherit"
+				 aria-label="menu"
+				 className={classes.menuButton}
+				 onClick={() => props.openAction()}>
+					<MenuIcon/>
+				</IconButton>
+				<Typography variant="h6" className={classes.title}>
+				</Typography>
+				<Button variant="text" color="inherit" >
+				</Button>
+			</Toolbar>
 		</AppBar>
 
 	)
