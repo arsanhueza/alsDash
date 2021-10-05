@@ -11,7 +11,6 @@ import {ThemeProvider} from '@material-ui/core/styles'
 import theme from './config/themeConfig'
 import Amplify from 'aws-amplify';
 import { AmplifyAuthenticator,withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
-
 import awsExports from "./aws-exports";
 
 Amplify.configure(awsExports);

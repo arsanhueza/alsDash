@@ -6,7 +6,7 @@ import { UIView } from '@uirouter/react';
 import SideBar from '../SideBar/index';
 import { makeStyles } from '@material-ui/styles';
 import {Hidden} from '@material-ui/core'
-import blue from '@material-ui/core/colors/red';
+import red from '@material-ui/core/colors/red';
 
 
 //styles
@@ -15,11 +15,11 @@ const styles = makeStyles(theme => ({
 		display: 'flex'
 	},
 	toolbar:{
-		minHeight:65
+		minHeight:6,
 	},
     content:{
-        flexGrow: 1,
-		backGroundColor: blue,
+    flexGrow: 1,
+		backGroundColor: red,
 		padding: '24px'
 	}
 
@@ -40,20 +40,17 @@ const Layout = () => {
 
 	return (
 	     <div className={classes.root}>
-			 <Header openAction={openAction}/>
 			 <Hidden xsDown>
 			  <SideBar variant="permanent" open={true}/>
 			 </Hidden>
 			 <Hidden smUp>
 			  <SideBar variant="temporary" open={open} onClose={openAction}/>
 			 </Hidden>
-
-			<div className={classes.content}>
-				<div className={classes.toolbar}>
 					<UIView />
+					<div className={classes.content}>
+					<div className={classes.toolbar}>
 				</div>
 			</div>
-
 		 </div>
 
 

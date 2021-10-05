@@ -18,8 +18,17 @@ const Exportar = () => {
     }, [])
 	const fetchTodos = async () => {
 		const todos = await DataStore.query(Todo);
+
+		const todosFormat = todos.filter(function(item){
+		   return item;
+		}).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave}){
+		    return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave};
+		});
+		console.log(todosFormat);
+
+
 		const json2csv = require('json2csv').parse;
-		const csv = json2csv(todos, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','createdAt', 'updatedAt', '_version','_lastChangedAt', '_deleted']);
+		const csv = json2csv(todosFormat, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','createdAt']);
 		downloadContent("datos.csv",csv);
 	}
 	return (

@@ -1,55 +1,72 @@
-import React from 'react';
-//materialui
-import {AppBar,Toolbar, Typography,IconButton, Button} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles'
-import { Auth } from 'aws-amplify';
-
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
-//styles
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
 
-const useStyle = makeStyles(theme => ({
-	  marginBottom: "1rem", // margen opcional,
-	  menuButton: {
-			marginRight: '12px',
-			[600]: {
-				display: 'none',
-			}
-		},
-	  title: {
-		flexGrow: 1
-	  },
-	  appBar: {
-		[600]: {
-            width: `calc(100% - 220px)`,
-            marginLeft: 240,
-        }
-	}
-  }));
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
 
-const Header = (props) => {
-	//estilos
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '24ch',
+      },
+    },
+  },
+}));
 
-	const classes = useStyle();
-
-	return (
-		<AppBar className={classes.appBar}>
-			<Toolbar>
-				<IconButton
-				 color="inherit"
-				 aria-label="menu"
-				 className={classes.menuButton}
-				 onClick={() => props.openAction()}>
-					<MenuIcon/>
-				</IconButton>
-				<Typography variant="h6" className={classes.title}>
-				</Typography>
-				<Button variant="text" color="inherit" >
-				</Button>
-			</Toolbar>
-		</AppBar>
-
-	)
+export default function SearchAppBar() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Buscar"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
-
-export default Header

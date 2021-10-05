@@ -27,7 +27,6 @@ function Cards(props) {
                 <Typography  className={classes.titulo}>
                 {props.titulo}
                 </Typography>
-
                 <Typography  className={classes.texto}>
                 {props.texto}
                 </Typography>

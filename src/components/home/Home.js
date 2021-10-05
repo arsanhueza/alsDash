@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
 import { DataStore } from '@aws-amplify/datastore';
+import { Predicates } from '@aws-amplify/datastore';
 import { Todo } from '../../models';
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -10,7 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import Header from '../../containers/Header/Header';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -32,7 +32,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Home() {
     const [todos, setTodos] = useState([])
-    const [formState, setFormState] = useState({ nroguia: '', rutcliente: '', estado: '', pesototal: '', cliente: '' ,fechadespacho: '', nrobultos: '', producto: '', nave: '', turno: ''})
+    const [formState, setFormState] = useState({
+    nroguia: '',
+     rutcliente: '',
+      estado: '',
+       pesototal: '',
+        cliente: '' ,
+        fechadespacho: '',
+         nrobultos: '',
+          producto: '',
+           nave: '',
+            turno: ''})
 
     useEffect(() => {
         fetchTodos()
@@ -42,7 +52,16 @@ export default function Home() {
     const fetchTodos = async () => {
       const todos = await DataStore.query(Todo);
       setTodos(todos)
+
     }
+
+    const eliminarTodo = async () => {
+      await DataStore.delete(Todo, Predicates.ALL);
+      fetchTodos()
+    }
+
+
+
 
     const setInput = (key, value, isNumber = false) => {
         value = (isNumber) ? parseInt(value) : value;
@@ -51,7 +70,11 @@ export default function Home() {
 
     return (
         <div className="home">
+        <Header />
             <div className="home__table">
+            <button onClick={eliminarTodo}>
+              Eliminar Todo
+            </button>
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead>

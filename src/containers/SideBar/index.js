@@ -8,38 +8,37 @@ import img from '../../assets/img/inicial.png'
 //styles
 const styles = makeStyles(theme => ({
     drawer:{
-        width: 100,
-        flexShrink: 0
+        width: 135,
+        flexShrink: 1
     },
     drawerPaper:{
         width: 220
-    }, 
+    },
     toolbar: 56,
     logo:{
         width: 60,
         height: 60,
-        marginLeft: 80  
+        marginLeft: 80
     }
 }))
 
 const SideBar = (props) => {
-    
+
     //styles
     const classes = styles()
 
     return (
-      <Drawer 
+      <Drawer
        className={classes.drawer}
        classes={{ paper: classes.drawerPaper}}
        anchor="left"
        variant={props.variant}
        open={props.open}
        onClose={props.onClose ? props.onClose : null}
-       > 
+       >
          <div className={classes.toolbar}>
          <img src={img} className={classes.logo} />
          </div>
-         <Divider/>
          <List/>
       </Drawer>
     )

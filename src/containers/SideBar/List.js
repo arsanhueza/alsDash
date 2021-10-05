@@ -16,7 +16,7 @@ const Lists = () => {
               <ListItemIcon>
                <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary="Tabla"/>
+              <ListItemText primary="Guías"/>
            </ListItem>
 		  </UISref>
 

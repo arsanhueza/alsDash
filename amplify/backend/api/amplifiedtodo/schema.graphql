@@ -1,3 +1,16 @@
+type Producto @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  tipo: String
+  hornada: String
+  calidad: String
+  nrobulto: String
+  peso: String
+  dimension: String
+  fechadespacho: String
+  fechaescaneo: String
+  horaescaneo: String
+}
+
 type Todo @model @auth(rules: [{allow: public}]) {
   id: ID!
   nroguia: String
@@ -10,5 +23,8 @@ type Todo @model @auth(rules: [{allow: public}]) {
   producto: String
   turno: String
   nave: String
+  fechaescaneo: String
+  horaescaneo: String
+  puerto: String
 }
  
