@@ -20,12 +20,12 @@ const Lists = () => {
            </ListItem>
 		  </UISref>
 
-          <UISref to="layout.embarques">
+          <UISref to="layout.productos">
           <ListItem button>
               <ListItemIcon>
                <InfoIcon />
               </ListItemIcon>
-              <ListItemText primary="Eliminar guías"/>
+              <ListItemText primary="Productos"/>
            </ListItem>
 		  </UISref>
 

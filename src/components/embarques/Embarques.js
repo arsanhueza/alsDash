@@ -42,7 +42,6 @@ class Embarques extends Component {
   deleteNote = async (todo) => {
     const modelToDelete = await DataStore.query(Todo, todo.id);
     DataStore.delete(modelToDelete);
-
     this.setState( { todos: this.state.todos.filter( (value, index, arr) => { return value.id !== todo.id; }) } );
   }
 

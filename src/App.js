@@ -3,7 +3,9 @@ import React from 'react';
 import { UIRouter, pushStateLocationPlugin} from '@uirouter/react';
 //components
 import Home from './components/home/Home';
-import Embarques from './components/embarques/Embarques';
+//import Embarques from './components/embarques/Embarques';
+import Productos from './components/productos/Productos';
+
 import Exportar from './components/exportar/Exportar'
 import Layout from './containers/Layout/Layout';
 //materialui
@@ -27,9 +29,9 @@ const states = [
     url  : '/',
     component : Home
   },{
-    name : 'layout.embarques',
-    url  : '/embarques',
-    component : Embarques
+    name : 'layout.productos',
+    url  : '/productos',
+    component : Productos
   },{
     name : 'layout.exportar',
     url  : '/exportar',

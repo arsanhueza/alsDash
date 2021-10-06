@@ -1,6 +1,6 @@
 type Producto @model @auth(rules: [{allow: public}]) {
   id: ID!
-  tipo: String
+  nombre: String
   hornada: String
   calidad: String
   nrobulto: String
@@ -9,6 +9,8 @@ type Producto @model @auth(rules: [{allow: public}]) {
   fechadespacho: String
   fechaescaneo: String
   horaescaneo: String
+  estado: String
+  turno: String
 }
 
 type Todo @model @auth(rules: [{allow: public}]) {

@@ -10,8 +10,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "tipo": {
-                    "name": "tipo",
+                "nombre": {
+                    "name": "nombre",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -68,6 +68,20 @@ export const schema = {
                 },
                 "horaescaneo": {
                     "name": "horaescaneo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "estado": {
+                    "name": "estado",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "turno": {
+                    "name": "turno",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -261,5 +275,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "92ea05d785551fd4013466aad368dd52"
+    "version": "1146238101706030b93d714d2d608e26"
 };

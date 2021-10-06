@@ -14,7 +14,7 @@ type TodoMetaData = {
 
 export declare class Producto {
   readonly id: string;
-  readonly tipo?: string;
+  readonly nombre?: string;
   readonly hornada?: string;
   readonly calidad?: string;
   readonly nrobulto?: string;
@@ -23,6 +23,8 @@ export declare class Producto {
   readonly fechadespacho?: string;
   readonly fechaescaneo?: string;
   readonly horaescaneo?: string;
+  readonly estado?: string;
+  readonly turno?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Producto, ProductoMetaData>);

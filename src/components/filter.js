@@ -17,7 +17,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     fontSize: 16,
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
@@ -39,32 +38,33 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function CustomizedSelects() {
-  const [age, setAge] = React.useState("");
+  const [item, setItem] = React.useState("");
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setItem(event.target.value);
+console.log(event.target.value);
   };
   return (
+
     <div>
       <FormControl sx={{ m: 1 }} variant="standard">
         <InputLabel htmlFor="demo-customized-select-native">Nombre</InputLabel>
         <NativeSelect
           id="demo-customized-select-native"
-          value={age}
+          value={item}
           onChange={handleChange}
           input={<BootstrapInput />}
-        >
+>
           <option aria-label="None" value="" />
-          <option value={10}>Id</option>
-          <option value={20}>rutCliente</option>
-          <option value={30}>estado</option>
-          <option value={10}>pesoTotal</option>
-          <option value={20}>Cliente</option>
-          <option value={30}>fechaDespacho</option>{" "}
-          <option value={10}>Ten</option>
-          <option value={20}>nro de bultos</option>
-          <option value={30}>producto</option>
-          <option value={30}>nave</option>
-          <option value={30}>turno</option>
+          <option value={"id"}>Id</option>
+          <option value={"rutCliente"}>rutCliente</option>
+          <option value={"estado"}>estado</option>
+          <option value={"pesoTotal"}>pesoTotal</option>
+          <option value={"cliente"}>cliente</option>
+          <option value={"fechaDespacho"}>fechaDespacho</option>{" "}
+          <option value={"nrodebultos"}>nrodebultos</option>
+          <option value={"producto"}>producto</option>
+          <option value={"nave"}>nave</option>
+          <option value={"turno"}>turno</option>
         </NativeSelect>
       </FormControl>
       <FormControl sx={{ m: 1 }} variant="standard">
