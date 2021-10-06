@@ -46,7 +46,6 @@ export default function Home() {
 
     useEffect(() => {
         fetchTodos()
-
     }, [])
 
     const fetchTodos = async () => {
@@ -59,9 +58,6 @@ export default function Home() {
       await DataStore.delete(Todo, Predicates.ALL);
       fetchTodos()
     }
-
-
-
 
     const setInput = (key, value, isNumber = false) => {
         value = (isNumber) ? parseInt(value) : value;
