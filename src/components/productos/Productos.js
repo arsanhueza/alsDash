@@ -11,7 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Header from '../../containers/Header/Header';
-import Filter from '../Filter';
+import Filter from '../filter';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -73,7 +73,7 @@ export default function Productos() {
                     <Table aria-label="customized table">
                         <TableHead>
                             <StyledTableRow>
-                                <StyledTableCell >Tipo</StyledTableCell>
+                                <StyledTableCell >Nombre</StyledTableCell>
                                 <StyledTableCell >Hornada</StyledTableCell>
                                 <StyledTableCell >Calidad</StyledTableCell>
                                 <StyledTableCell >Nro Bulto</StyledTableCell>
@@ -82,12 +82,13 @@ export default function Productos() {
                                 <StyledTableCell >Fecha Despacho</StyledTableCell>
                                 <StyledTableCell >Fecha Escaneo</StyledTableCell>
                                 <StyledTableCell >Hora Escaneo</StyledTableCell>
+                                <StyledTableCell >Turno</StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
                             {todos.map((row) => (
-                              <TableRow key={row.tipo}>
-                              <TableCell >{row.tipo}</TableCell>
+                              <TableRow key={row.nombre}>
+                              <TableCell >{row.nombre}</TableCell>
                               <TableCell >{row.hornada}</TableCell>
                               <TableCell >{row.calidad}</TableCell>
                               <TableCell >{row.nrobulto}</TableCell>
@@ -96,6 +97,8 @@ export default function Productos() {
                               <TableCell >{row.fechadespacho}</TableCell>
                               <TableCell >{row.fechaescaneo}</TableCell>
                               <TableCell >{row.horaescaneo}</TableCell>
+                              <TableCell >{row.turno}</TableCell>
+
                               </TableRow>
                             ))}
                         </TableBody>

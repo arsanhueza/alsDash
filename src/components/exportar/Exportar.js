@@ -21,14 +21,14 @@ const Exportar = () => {
 
 		const todosFormat = todos.filter(function(item){
 		   return item;
-		}).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave}){
-		    return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave};
+		}).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave,fechaescaneo,puerto}){
+		    return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,nrobultos,producto,turno,nave,fechaescaneo, puerto};
 		});
 		console.log(todosFormat);
 
 
 		const json2csv = require('json2csv').parse;
-		const csv = json2csv(todosFormat, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','createdAt']);
+		const csv = json2csv(todosFormat, ['id', 'nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho', 'nrobultos', 'producto', 'turno','nave','fechaescaneo','puerto','createdAt']);
 		downloadContent("datos.csv",csv);
 	}
 	return (

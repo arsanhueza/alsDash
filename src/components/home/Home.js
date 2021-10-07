@@ -11,7 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Header from '../../containers/Header/Header';
-import Filter from '../Filter';
+import Filter from '../filter';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -20,7 +20,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.head}`]: {
     fontSize: 16,
+    padding: '10px'
+    
+
   },
+  
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -87,7 +91,9 @@ const filtrar = async() =>{
 
     return (
         <div className="home">
-            <div className="home__table">
+
+            <div className="home__table" >
+              
             <button onClick={eliminarTodo}>
               Eliminar Todo
             </button>
@@ -95,8 +101,11 @@ const filtrar = async() =>{
               Filtrar
             </button>
             <Filter handleChange={filtrar}/>
-                <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
+                <TableContainer component={Paper} >
+                    <Table 
+                    
+                    aria-label="customized table"
+                    >
                         <TableHead>
                             <StyledTableRow>
                                 <StyledTableCell >Guía</StyledTableCell>
@@ -111,6 +120,8 @@ const filtrar = async() =>{
                                 <StyledTableCell >Producto</StyledTableCell>
                                 <StyledTableCell >Nave</StyledTableCell>
                                 <StyledTableCell >Turno</StyledTableCell>
+                                <StyledTableCell >Puerto</StyledTableCell>
+
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
@@ -128,6 +139,8 @@ const filtrar = async() =>{
                               <TableCell >{row.producto}</TableCell>
                               <TableCell >{row.nave}</TableCell>
                               <TableCell >{row.turno}</TableCell>
+                              <TableCell >{row.puerto}</TableCell>
+
                               </TableRow>
                             ))}
                         </TableBody>
