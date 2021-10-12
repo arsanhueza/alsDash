@@ -95,13 +95,12 @@ export default function Productos() {
     return (
         <div className="home">
             <div className="home__table">
-            <button onClick={exportar}>
-              Exportar
-            </button>
             <button onClick={eliminarTodo}>
               Borrar Todo
             </button>
-
+            <button onClick={exportar}>
+              Exportar
+            </button>
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead>
