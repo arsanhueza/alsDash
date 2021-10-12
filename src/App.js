@@ -32,10 +32,6 @@ const states = [
     name : 'layout.productos',
     url  : '/productos',
     component : Productos
-  },{
-    name : 'layout.exportar',
-    url  : '/exportar',
-    component : Exportar
   }
 ]
 

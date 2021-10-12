@@ -28,15 +28,6 @@ const Lists = () => {
               <ListItemText primary="Productos"/>
            </ListItem>
 		  </UISref>
-
-          <UISref to="layout.exportar">
-          <ListItem button>
-              <ListItemIcon>
-               <ExportIcon />
-              </ListItemIcon>
-              <ListItemText primary="Exportar"/>
-           </ListItem>
-		  </UISref>
       <AmplifySignOut buttonText="Cerrar Sesión"></AmplifySignOut>
 
       </List>
