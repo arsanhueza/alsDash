@@ -13,6 +13,9 @@ import Paper from "@mui/material/Paper";
 import Header from '../../containers/Header/Header';
 import Filter from '../filter';
 import json2csv from "json2csv";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -69,7 +72,22 @@ export default function Productos() {
 
 
     }
-
+    const submit = () => {
+       confirmAlert({
+         title: "Atención ",
+         message: "¿Estás seguro de eliminar todos los datos?",
+         buttons: [
+           {
+             label: "Sí",
+             onClick: (eliminarTodo)
+           },
+           {
+             label: "No"
+             // onClick: () => alert("Click No")
+           }
+         ]
+       });
+     };
     const eliminarTodo = async () => {
       await DataStore.delete(Producto, Predicates.ALL);
       fetchTodos()
@@ -100,7 +118,7 @@ export default function Productos() {
     return (
         <div className="home">
             <div className="home__table">
-            <button onClick={eliminarTodo}>
+            <button onClick={submit}>
               Borrar Todo
             </button>
             <button onClick={exportar}>
