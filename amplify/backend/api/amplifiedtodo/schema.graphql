@@ -11,6 +11,8 @@ type Producto @model @auth(rules: [{allow: public}]) {
   horaescaneo: String
   estado: String
   turno: String
+  nave: String
+  puerto: String
 }
 
 type Todo @model @auth(rules: [{allow: public}]) {

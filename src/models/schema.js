@@ -87,6 +87,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "nave": {
+                    "name": "nave",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "puerto": {
+                    "name": "puerto",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -275,5 +289,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "1146238101706030b93d714d2d608e26"
+    "version": "c7ecd6a8a2617b33714b3d20bc9617d3"
 };

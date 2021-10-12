@@ -25,6 +25,8 @@ export declare class Producto {
   readonly horaescaneo?: string;
   readonly estado?: string;
   readonly turno?: string;
+  readonly nave?: string;
+  readonly puerto?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Producto, ProductoMetaData>);
