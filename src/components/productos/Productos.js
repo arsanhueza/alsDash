@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Header from '../../containers/Header/Header';
 import Filter from '../filter';
+import json2csv from "json2csv";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,6 +32,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
+async function downloadContent(name, content) {
+	var atag = document.createElement("a");
+	var file = new Blob([content], {type: 'text/plain'});
+	atag.href = URL.createObjectURL(file);
+	atag.download = name;
+	atag.click();
+}
 
 export default function Productos() {
     const [todos, setTodos] = useState([])
@@ -55,12 +64,23 @@ export default function Productos() {
 
 
     }
-    //
-    // const eliminarTodo = async () => {
-    //   await DataStore.delete(Producto, Predicates.ALL);
-    //   fetchTodos()
-    // }
+    const exportar = async() =>{
 
+      const todos = await DataStore.query(Producto);
+
+      const todosFormat = todos.filter(function(item){
+         return item;
+      }).map(function({tipo,hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo}){
+          return {tipo, hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo};
+      });
+      console.log(todosFormat);
+
+
+      const json2csv = require('json2csv').parse;
+      const csv = json2csv(todosFormat, ['tipo', 'hornada','calidad','nrobulto','peso','dimension','fechadespacho','fechaescaneo','horaescaneo']);
+      downloadContent("datos.csv",csv);
+
+}
     const setInput = (key, value, isNumber = false) => {
         value = (isNumber) ? parseInt(value) : value;
         setFormState({ ...formState, [key]: value })
@@ -69,6 +89,9 @@ export default function Productos() {
     return (
         <div className="home">
             <div className="home__table">
+            <button onClick={exportar}>
+              Exportar
+            </button>
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead>

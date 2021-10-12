@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Header from '../../containers/Header/Header';
 import Filter from '../filter';
+import json2csv from "json2csv";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -21,10 +22,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     fontSize: 16,
     padding: '10px'
-    
+
 
   },
-  
+
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -35,6 +36,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
+async function downloadContent(name, content) {
+	var atag = document.createElement("a");
+	var file = new Blob([content], {type: 'text/plain'});
+	atag.href = URL.createObjectURL(file);
+	atag.download = name;
+	atag.click();
+}
+
 
 export default function Home() {
     const [todos, setTodos] = useState([])
@@ -67,19 +77,22 @@ export default function Home() {
       await DataStore.delete(Todo, Predicates.ALL);
       fetchTodos()
     }
-const filtrar = async() =>{
-  // const string = "rutcliente";
-  // // const todosFiltrados = await DataStore.query(Todo, c => c.rutcliente ("contains", "23"));
-  // const todosParaFiltrar = await DataStore.query(Todo);
-  //
-  // var s = Filter.value;
-  //
-  // const result = todosParaFiltrar.filter(word.s.l => word.contains('23'));
-  // const result = words.filter(word => word.length > 6);
-  //
-  // // setTodos(todosFiltrados)
-  //
-  // console.log(Filter.value);
+
+const exportar = async() =>{
+
+  const todos = await DataStore.query(Todo);
+
+  const todosFormat = todos.filter(function(item){
+     return item;
+  }).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno}){
+      return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno};
+  });
+  console.log(todosFormat);
+
+
+  const json2csv = require('json2csv').parse;
+  const csv = json2csv(todosFormat, ['nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho','fechaescaneo','horaescaneo','nrobultos', 'producto','nave','turno']);
+  downloadContent("Guias.csv",csv);
 
 
 }
@@ -93,17 +106,16 @@ const filtrar = async() =>{
         <div className="home">
 
             <div className="home__table" >
-              
+
             <button onClick={eliminarTodo}>
               Eliminar Todo
             </button>
-            <button onClick={filtrar}>
-              Filtrar
+            <button onClick={exportar}>
+              Exportar
             </button>
-            <Filter handleChange={filtrar}/>
                 <TableContainer component={Paper} >
-                    <Table 
-                    
+                    <Table
+
                     aria-label="customized table"
                     >
                         <TableHead>
