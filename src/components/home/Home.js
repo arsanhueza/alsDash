@@ -60,7 +60,8 @@ export default function Home() {
          nrobultos: '',
           producto: '',
            nave: '',
-            turno: ''})
+            turno: '',
+            puerto: ''})
 
     useEffect(() => {
         fetchTodos()
@@ -84,14 +85,14 @@ const exportar = async() =>{
 
   const todosFormat = todos.filter(function(item){
      return item;
-  }).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno}){
-      return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno};
+  }).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno,puerto}){
+      return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno,puerto};
   });
   console.log(todosFormat);
 
 
   const json2csv = require('json2csv').parse;
-  const csv = json2csv(todosFormat, ['nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho','fechaescaneo','horaescaneo','nrobultos', 'producto','nave','turno']);
+  const csv = json2csv(todosFormat, ['nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho','fechaescaneo','horaescaneo','nrobultos', 'producto','nave','turno','puerto']);
   downloadContent("Guias.csv",csv);
 
 }

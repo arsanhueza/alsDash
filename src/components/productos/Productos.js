@@ -44,7 +44,7 @@ async function downloadContent(name, content) {
 export default function Productos() {
     const [todos, setTodos] = useState([])
     const [formState, setFormState] = useState({
-     tipo: '',
+     nombre: '',
       hornada: '',
        calidad: '',
         nrobulto: '' ,
@@ -52,7 +52,12 @@ export default function Productos() {
          dimension: '',
           fechadespacho: '',
            fechaescaneo: '',
-            horaescaneo: ''})
+            horaescaneo: '',
+            turno:'',
+            nave: '',
+             puerto: ''
+           }
+  )
 
     useEffect(() => {
         fetchTodos()
@@ -76,14 +81,14 @@ export default function Productos() {
 
       const todosFormat = todos.filter(function(item){
          return item;
-      }).map(function({tipo,hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo}){
-          return {tipo, hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo};
+      }).map(function({nombre,hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo,turno,nave,puerto}){
+          return {nombre, hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo,turno,nave,puerto};
       });
       console.log(todosFormat);
 
 
       const json2csv = require('json2csv').parse;
-      const csv = json2csv(todosFormat, ['tipo', 'hornada','calidad','nrobulto','peso','dimension','fechadespacho','fechaescaneo','horaescaneo']);
+      const csv = json2csv(todosFormat, ['nombre', 'hornada','calidad','nrobulto','peso','dimension','fechadespacho','fechaescaneo','horaescaneo','turno','nave','puerto']);
       downloadContent("Productos.csv",csv);
 
 }
@@ -115,6 +120,8 @@ export default function Productos() {
                                 <StyledTableCell >Fecha Escaneo</StyledTableCell>
                                 <StyledTableCell >Hora Escaneo</StyledTableCell>
                                 <StyledTableCell >Turno</StyledTableCell>
+                                <StyledTableCell >Nave</StyledTableCell>
+                                <StyledTableCell >Puerto</StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
@@ -130,7 +137,8 @@ export default function Productos() {
                               <TableCell >{row.fechaescaneo}</TableCell>
                               <TableCell >{row.horaescaneo}</TableCell>
                               <TableCell >{row.turno}</TableCell>
-
+                              <TableCell >{row.nave}</TableCell>
+                              <TableCell >{row.puerto}</TableCell>
                               </TableRow>
                             ))}
                         </TableBody>
