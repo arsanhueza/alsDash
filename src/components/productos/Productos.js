@@ -64,6 +64,12 @@ export default function Productos() {
 
 
     }
+
+    const eliminarTodo = async () => {
+      await DataStore.delete(Producto, Predicates.ALL);
+      fetchTodos()
+    }
+
     const exportar = async() =>{
 
       const todos = await DataStore.query(Producto);
@@ -78,7 +84,7 @@ export default function Productos() {
 
       const json2csv = require('json2csv').parse;
       const csv = json2csv(todosFormat, ['tipo', 'hornada','calidad','nrobulto','peso','dimension','fechadespacho','fechaescaneo','horaescaneo']);
-      downloadContent("datos.csv",csv);
+      downloadContent("Productos.csv",csv);
 
 }
     const setInput = (key, value, isNumber = false) => {
@@ -92,6 +98,10 @@ export default function Productos() {
             <button onClick={exportar}>
               Exportar
             </button>
+            <button onClick={eliminarTodo}>
+              Borrar Todo
+            </button>
+
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead>

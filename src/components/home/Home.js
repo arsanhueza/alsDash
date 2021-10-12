@@ -71,7 +71,7 @@ export default function Home() {
       setTodos(todos)
 
 
-    }
+}
 
     const eliminarTodo = async () => {
       await DataStore.delete(Todo, Predicates.ALL);
@@ -94,7 +94,6 @@ const exportar = async() =>{
   const csv = json2csv(todosFormat, ['nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho','fechaescaneo','horaescaneo','nrobultos', 'producto','nave','turno']);
   downloadContent("Guias.csv",csv);
 
-
 }
 
     const setInput = (key, value, isNumber = false) => {
@@ -108,7 +107,7 @@ const exportar = async() =>{
             <div className="home__table" >
 
             <button onClick={eliminarTodo}>
-              Eliminar Todo
+              Borrar Todo
             </button>
             <button onClick={exportar}>
               Exportar
