@@ -145,7 +145,9 @@ this.componentDidMount()
       }
   }}
         options={{
-          selection: true,exportButton: true
+          selection: true,
+          exportButton: true,
+          exportAllData:true
         }}
 
         actions={[
