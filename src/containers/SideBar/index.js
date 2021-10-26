@@ -8,7 +8,7 @@ import img from '../../assets/img/inicial.png'
 //styles
 const styles = makeStyles(theme => ({
     drawer:{
-        width: 400,
+        width: 220,
         flexShrink: 1
     },
     drawerPaper:{

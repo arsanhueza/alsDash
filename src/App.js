@@ -3,7 +3,6 @@ import React from 'react';
 import { UIRouter, pushStateLocationPlugin} from '@uirouter/react';
 //components
 import Home from './components/home/Home';
-//import Embarques from './components/embarques/Embarques';
 import Productos from './components/productos/Productos';
 
 import Exportar from './components/exportar/Exportar'

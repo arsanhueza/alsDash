@@ -20,7 +20,7 @@ const styles = makeStyles(theme => ({
     content:{
     flexGrow: 1,
 		backGroundColor: red,
-		padding: '24px'
+		padding: '2px'
 	}
 
 }))

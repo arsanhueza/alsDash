@@ -1,170 +1,162 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Predicates } from '@aws-amplify/datastore';
 import { Producto } from '../../models';
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Header from '../../containers/Header/Header';
-import Filter from '../filter';
-import json2csv from "json2csv";
+import MaterialTable from "material-table";
+import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+
+class Productos extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = { todos:[] }
+  }
+  async componentDidMount(){
+    const data = await DataStore.query(Producto);
+    var task_names = [];
+
+    for (var i = 0, max = data.length; i < max; i += 1) {
+
+        task_names.push({id: data[i].id,
+          nombre: data[i].nombre,
+          hornada:data[i].hornada,
+          calidad:data[i].calidad,
+          nrobulto:data[i].nrobulto,
+          peso:data[i].peso,
+          dimension:data[i].dimension,
+          fechadespacho:data[i].fechadespacho,
+          fechaescaneo:data[i].fechaescaneo,
+          horaescaneo:data[i].horaescaneo,
+          turno:data[i].turno,
+          nave:data[i].nave,
+          puerto:data[i].puerto,
+          });
+          }
+
+    this.setState( { todos: task_names } )
+  }
+   submit = (nRowsSelected) => {
 
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.head}`]: {
-    fontSize: 16,
-  },
-}));
+     confirmAlert({
+       title: "😳",
+       message: "¿Estás seguro de eliminar " + nRowsSelected.length +  " datos?",
+       buttons: [
+         {
+      label: "Sí",
+           onClick: (this.eliminarTodo(nRowsSelected))
+         },
+         {
+           label: "No"
+         }
+       ]
+     });
+   };
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.focus,
-  },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+  deleteNote = async (todo) => {
+    const modelToDelete = await DataStore.query(Producto, todo.id);
+    DataStore.delete(modelToDelete);
+    this.setState( { todos: this.state.todos.filter( (value, index, arr) => { return value.id !== todo.id; }) } );
+  }
 
-async function downloadContent(name, content) {
-	var atag = document.createElement("a");
-	var file = new Blob([content], {type: 'text/plain'});
-	atag.href = URL.createObjectURL(file);
-	atag.download = name;
-	atag.click();
-}
+   eliminarTodo = async (nros) => {
+  var se = [];
+    const po = await DataStore.query(Producto);
 
-export default function Productos() {
-    const [todos, setTodos] = useState([])
-    const [formState, setFormState] = useState({
-     nombre: '',
-      hornada: '',
-       calidad: '',
-        nrobulto: '' ,
-        peso: '',
-         dimension: '',
-          fechadespacho: '',
-           fechaescaneo: '',
-            horaescaneo: '',
-            turno:'',
-            nave: '',
-             puerto: ''
-           }
-  )
+    nros.forEach((item, i) => {
 
-    useEffect(() => {
-        fetchTodos()
-    }, [])
+      const result = po.filter(p => p.nroguia == item.nroguia).forEach((z, o) => {
+        DataStore.delete(Producto, post => post.nroguia("eq", z.nroguia));
 
-    const fetchTodos = async () => {
-      const todos = await DataStore.query(Producto);
-      setTodos(todos)
-
-
-    }
-    const submit = () => {
-       confirmAlert({
-         title: "Atención ",
-         message: "¿Estás seguro de eliminar todos los datos?",
-         buttons: [
-           {
-             label: "Sí",
-             onClick: (eliminarTodo)
-           },
-           {
-             label: "No"
-             // onClick: () => alert("Click No")
-           }
-         ]
-       });
-     };
-    const eliminarTodo = async () => {
-      await DataStore.delete(Producto, Predicates.ALL);
-      fetchTodos()
-    }
-
-    const exportar = async() =>{
-
-      const todos = await DataStore.query(Producto);
-
-      const todosFormat = todos.filter(function(item){
-         return item;
-      }).map(function({nombre,hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo,turno,nave,puerto}){
-          return {nombre, hornada,calidad,nrobulto,peso,dimension,fechadespacho,fechaescaneo,horaescaneo,turno,nave,puerto};
       });
-      console.log(todosFormat);
+this.componentDidMount()
+  });
+
+  }
 
 
-      const json2csv = require('json2csv').parse;
-      const csv = json2csv(todosFormat, ['nombre', 'hornada','calidad','nrobulto','peso','dimension','fechadespacho','fechaescaneo','horaescaneo','turno','nave','puerto']);
-      downloadContent("Productos.csv",csv);
-
-}
-    const setInput = (key, value, isNumber = false) => {
-        value = (isNumber) ? parseInt(value) : value;
-        setFormState({ ...formState, [key]: value })
-    }
-
+  render() {
     return (
-        <div className="home">
-            <div className="home__table">
-            <button onClick={submit}>
-              Borrar Todo
-            </button>
-            <button onClick={exportar}>
-              Exportar
-            </button>
-                <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
-                        <TableHead>
-                            <StyledTableRow>
-                                <StyledTableCell >Nombre</StyledTableCell>
-                                <StyledTableCell >Hornada</StyledTableCell>
-                                <StyledTableCell >Calidad</StyledTableCell>
-                                <StyledTableCell >Nro Bulto</StyledTableCell>
-                                <StyledTableCell >Peso</StyledTableCell>
-                                <StyledTableCell >Dimensión</StyledTableCell>
-                                <StyledTableCell >Fecha Despacho</StyledTableCell>
-                                <StyledTableCell >Fecha Escaneo</StyledTableCell>
-                                <StyledTableCell >Hora Escaneo</StyledTableCell>
-                                <StyledTableCell >Turno</StyledTableCell>
-                                <StyledTableCell >Nave</StyledTableCell>
-                                <StyledTableCell >Puerto</StyledTableCell>
-                            </StyledTableRow>
-                        </TableHead>
-                        <TableBody>
-                            {todos.map((row) => (
-                              <TableRow key={row.nombre}>
-                              <TableCell >{row.nombre}</TableCell>
-                              <TableCell >{row.hornada}</TableCell>
-                              <TableCell >{row.calidad}</TableCell>
-                              <TableCell >{row.nrobulto}</TableCell>
-                              <TableCell >{row.peso}</TableCell>
-                              <TableCell >{row.dimension}</TableCell>
-                              <TableCell >{row.fechadespacho}</TableCell>
-                              <TableCell >{row.fechaescaneo}</TableCell>
-                              <TableCell >{row.horaescaneo}</TableCell>
-                              <TableCell >{row.turno}</TableCell>
-                              <TableCell >{row.nave}</TableCell>
-                              <TableCell >{row.puerto}</TableCell>
-                              </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </div>
-    );
+      <MaterialTable
+      components={{
+   Toolbar: (props) => (
+     <div
+       style={{
+         backgroundColor: '#ffc680',
+         display:'flex',
+         justifyContent: "left"
+       }}
+     >
+       <MTableToolbar {...props} />
+     </div>
+   )
+          }}
+        title="Productos 1\n\"
+        columns={[    { title: "ID", field: "id" },
+            { title: "Nombre", field: "nombre" },
+            { title: "Hornada", field: "hornada" },
+            { title: "Calidad", field: "calidad" },
+            { title: "Nº Bulto", field: "nrobulto" },
+            { title: "Peso Total (kg)", field: "peso" },
+            { title: "Dimensión", field: "dimension" },
+            { title: "Fecha Despacho", field: "fechadespacho" },
+            { title: "Fecha escaneo", field: "fechaescaneo" },
+            { title: "Hora escaneo", field: "horaescaneo" },
+            { title: "Turno", field: "turno" },
+            { title: "Nave", field: "nave" },
+            { title: "Puerto", field: "puerto" }
+]}
+
+        data={this.state.todos}
+        localization={{
+      body: {
+          emptyDataSourceMessage: "No hay Productos para mostrar",
+          deleteTooltip: 'Eliminar'
+      },
+      header: {
+          actions: 'Seleccionar'
+      },
+      pagination: {
+          labelDisplayedRows: '{from}-{to} de {count}',
+          labelRowsSelect: 'Producto',
+          labelRowsPerPage: 'Productos por página:',
+          firstAriaLabel: 'Primera página',
+          firstTooltip: 'Primera página',
+          previousAriaLabel: 'Anterior',
+          previousTooltip: 'Anterior',
+          nextAriaLabel: 'Siguiente',
+          nextTooltip: 'Siguiente',
+          lastAriaLabel: 'Última página',
+          lastTooltip: 'Última página'
+      },
+      toolbar: {
+          addRemoveColumns: 'Añadir o eliminar',
+          nRowsSelected: '{0} producto(s) seleccionado(s)',
+          showColumnsTitle: 'Ver productos',
+          showColumnsAriaLabel: 'Ver Productos',
+          exportTitle: 'Exportar',
+          exportAriaLabel: 'Exportar',
+          exportName: 'Exportar como CSV',
+          searchTooltip: 'Buscar',
+          searchPlaceholder: 'Buscar'
+      }
+  }}
+        options={{
+          selection: true,exportButton: true
+        }}
+
+        actions={[
+          {
+            tooltip: 'Eliminar',
+            icon: 'delete',
+            onClick: (event,dato) => {this.eliminarTodo(dato)}
+          }
+  ]}
+              />
+        );
+  }
 }
 
-// export default Home;
+export default Productos;
