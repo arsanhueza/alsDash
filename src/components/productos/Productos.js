@@ -38,29 +38,6 @@ class Productos extends Component {
 
     this.setState( { todos: task_names } )
   }
-   submit = (nRowsSelected) => {
-
-
-     confirmAlert({
-       title: "😳",
-       message: "¿Estás seguro de eliminar " + nRowsSelected.length +  " datos?",
-       buttons: [
-         {
-      label: "Sí",
-           onClick: (this.eliminarTodo(nRowsSelected))
-         },
-         {
-           label: "No"
-         }
-       ]
-     });
-   };
-
-  deleteNote = async (todo) => {
-    const modelToDelete = await DataStore.query(Producto, todo.id);
-    DataStore.delete(modelToDelete);
-    this.setState( { todos: this.state.todos.filter( (value, index, arr) => { return value.id !== todo.id; }) } );
-  }
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -117,6 +94,13 @@ this.componentDidMount()
       header: {
           actions: 'Seleccionar'
       },
+      grouping:{
+
+        placeholder:'Arrastra el encabezado, para agrupar',
+        groupedBy:"Agrupado por:"
+
+
+      },
       pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',
           labelRowsSelect: 'Producto',
@@ -147,7 +131,13 @@ this.componentDidMount()
           exportAllData:true,
           exportButton: true,
           toolbarButtonAlignment:'left',
-          searchFieldAlignment:'left'
+          searchFieldAlignment:'left',
+          pageSize:10,
+          pageSizeOptions:[5,10,20,this.state.todos.length],
+          padding:'dense',
+          grouping: true
+
+
         }}
 
         actions={[

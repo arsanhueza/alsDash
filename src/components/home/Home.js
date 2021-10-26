@@ -39,29 +39,6 @@ class Home extends Component {
 
     this.setState( { todos: task_names } )
   }
-   submit = (nRowsSelected) => {
-
-
-     confirmAlert({
-       title: "😳",
-       message: "¿Estás seguro de eliminar " + nRowsSelected.length +  " datos?",
-       buttons: [
-         {
-      label: "Sí",
-           onClick: (this.eliminarTodo(nRowsSelected))
-         },
-         {
-           label: "No"
-         }
-       ]
-     });
-   };
-
-  deleteNote = async (todo) => {
-    const modelToDelete = await DataStore.query(Todo, todo.id);
-    DataStore.delete(modelToDelete);
-    this.setState( { todos: this.state.todos.filter( (value, index, arr) => { return value.id !== todo.id; }) } );
-  }
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -149,7 +126,11 @@ this.componentDidMount()
           exportButton: true,
           exportAllData:true,
           toolbarButtonAlignment:'left',
-          searchFieldAlignment:'left'
+          searchFieldAlignment:'left',
+          pageSize:10,
+          pageSizeOptions:[5,10,20,this.state.todos.length],
+          padding:'dense',
+          grouping: true
 
         }}
 
