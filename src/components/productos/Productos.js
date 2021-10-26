@@ -19,7 +19,7 @@ class Productos extends Component {
 
     for (var i = 0, max = data.length; i < max; i += 1) {
 
-        task_names.push({id: data[i].id,
+        task_names.push({
           nombre: data[i].nombre,
           hornada:data[i].hornada,
           calidad:data[i].calidad,
@@ -32,6 +32,7 @@ class Productos extends Component {
           turno:data[i].turno,
           nave:data[i].nave,
           puerto:data[i].puerto,
+          id: data[i].id
           });
           }
 
@@ -94,7 +95,7 @@ this.componentDidMount()
    )
           }}
         title="Productos 1\n\"
-        columns={[    { title: "ID", field: "id" },
+        columns={[
             { title: "Nombre", field: "nombre" },
             { title: "Hornada", field: "hornada" },
             { title: "Calidad", field: "calidad" },
@@ -106,7 +107,8 @@ this.componentDidMount()
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Turno", field: "turno" },
             { title: "Nave", field: "nave" },
-            { title: "Puerto", field: "puerto" }
+            { title: "Puerto", field: "puerto" },
+            { title: "ID", field: "id" }
 ]}
 
         data={this.state.todos}

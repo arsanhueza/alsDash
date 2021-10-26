@@ -20,7 +20,7 @@ class Home extends Component {
 
     for (var i = 0, max = data.length; i < max; i += 1) {
 
-        task_names.push({id: data[i].id,
+        task_names.push({
           nroguia: data[i].nroguia,
           rutcliente:data[i].rutcliente,
           estado:data[i].estado,
@@ -33,6 +33,7 @@ class Home extends Component {
           nave:data[i].nave,
           turno:data[i].turno,
           puerto:data[i].puerto,
+          id: data[i].id
           });
           }
 
@@ -95,7 +96,7 @@ this.componentDidMount()
    )
           }}
         title="Guías  **"
-        columns={[    { title: "ID", field: "id" },
+        columns={[
             { title: "Nº Guía", field: "nroguia" },
             { title: "Rut Cliente", field: "rutcliente" },
             { title: "Estado", field: "estado" },
@@ -107,7 +108,8 @@ this.componentDidMount()
             { title: "Producto", field: "producto" },
             { title: "Nave", field: "nave" },
             { title: "Turno", field: "turno" },
-            { title: "Puerto", field: "puerto" }
+            { title: "Puerto", field: "puerto" },
+            { title: "ID", field: "id" }
 ]}
 
         data={this.state.todos}
