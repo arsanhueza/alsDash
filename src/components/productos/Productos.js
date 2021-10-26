@@ -45,8 +45,8 @@ class Productos extends Component {
 
     nros.forEach((item, i) => {
 
-      const result = po.filter(p => p.nroguia == item.nroguia).forEach((z, o) => {
-        DataStore.delete(Producto, post => post.nroguia("eq", z.nroguia));
+      const result = po.filter(p => p.id == item.id).forEach((z, o) => {
+        DataStore.delete(Producto, post => post.id("eq", z.id));
 
       });
 this.componentDidMount()
@@ -98,8 +98,6 @@ this.componentDidMount()
 
         placeholder:'Arrastra el encabezado, para agrupar',
         groupedBy:"Agrupado por:"
-
-
       },
       pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',

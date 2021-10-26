@@ -46,8 +46,8 @@ class Home extends Component {
 
     nros.forEach((item, i) => {
 
-      const result = po.filter(p => p.nroguia == item.nroguia).forEach((z, o) => {
-        DataStore.delete(Todo, post => post.nroguia("eq", z.nroguia));
+      const result = po.filter(p => p.id == item.id).forEach((z, o) => {
+        DataStore.delete(Todo, post => post.id("eq", z.id));
 
       });
 this.componentDidMount()
