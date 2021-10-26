@@ -96,6 +96,11 @@ this.componentDidMount()
       header: {
           actions: 'Seleccionar'
       },
+      grouping:{
+
+        placeholder:'Arrastra el encabezado, para agrupar',
+        groupedBy:"Agrupado por:"
+      },
       pagination: {
           labelDisplayedRows: '{from}-{to} de {count}',
           labelRowsSelect: 'Guías',
