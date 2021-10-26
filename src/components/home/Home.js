@@ -1,186 +1,159 @@
-import React, { useEffect, useState } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Predicates } from '@aws-amplify/datastore';
 import { Todo } from '../../models';
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Header from '../../containers/Header/Header';
-import Filter from '../filter';
-import json2csv from "json2csv";
+import React, { useEffect, useState } from 'react';
+import MaterialTable from "material-table";
+import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
-
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.head}`]: {
-    fontSize: 16,
-    padding: '10px'
-
-
-  },
-
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.focus,
-  },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-async function downloadContent(name, content) {
-	var atag = document.createElement("a");
-	var file = new Blob([content], {type: 'text/plain'});
-	atag.href = URL.createObjectURL(file);
-	atag.download = name;
-	atag.click();
-}
 
 
 export default function Home() {
-    const [todos, setTodos] = useState([])
-    const [formState, setFormState] = useState({
-    nroguia: '',
-     rutcliente: '',
-      estado: '',
-       pesototal: '',
-        cliente: '' ,
-        fechadespacho: '',
-        fechaescaneo: '',
-        horaescaneo: '',
-         nrobultos: '',
-          producto: '',
-           nave: '',
-            turno: '',
-            puerto: ''})
+  const { useState } = React;
 
-    useEffect(() => {
-        fetchTodos()
-    }, [])
+  const [columns, setColumns] = useState([
+    { title: "Nº Guía", field: "nroguia" },
+    { title: "Rut Cliente", field: "rutcliente" },
+    { title: "Estado", field: "estado" },
+    { title: "Peso Total (kg)", field: "pesototal" },
+    { title: "Cliente", field: "cliente" },
+    { title: "Fecha Despacho", field: "fechadespacho" },
+    { title: "Hora escaneo", field: "horaescaneo" },
+    { title: "Nº Bultos", field: "nrobultos" },
+    { title: "Producto", field: "producto" },
+    { title: "Nave", field: "nave" },
+    { title: "Turno", field: "turno" },
+    { title: "Puerto", field: "puerto" }
+  ]);
 
-    const fetchTodos = async () => {
-      const todos = await DataStore.query(Todo);
-      setTodos(todos)
-
-
-}
-
-
-const submit = () => {
-   confirmAlert({
-     title: "Atención ",
-     message: "¿Estás seguro de eliminar todos los datos?",
-     buttons: [
-       {
-         label: "Sí",
-         onClick: (eliminarTodo)
-       },
-       {
-         label: "No"
-         // onClick: () => alert("Click No")
-       }
-     ]
-   });
- };
-
-    const eliminarTodo = async () => {
-      await DataStore.delete(Todo, Predicates.ALL);
+  const [data, setData] = useState([{nroguia:'',rutcliente:'',estado:'',pesototal:'',cliente:'',fechadespacho:'',
+    horaescaneo:'',nrobultos:'',nave:'',turno:'',puerto:''}
+  ]);
+  useEffect(() => {
       fetchTodos()
-    }
+  }, [])
 
-const exportar = async() =>{
+  const fetchTodos = async () => {
+    const data = await DataStore.query(Todo);
+    var task_names = [];
 
-  const todos = await DataStore.query(Todo);
+    for (var i = 0, max = data.length; i < max; i += 1) {
 
-  const todosFormat = todos.filter(function(item){
-     return item;
-  }).map(function({nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno,puerto}){
-      return {nroguia, rutcliente,estado,pesototal,cliente,fechadespacho,fechaescaneo,horaescaneo,nrobultos,producto,nave,turno,puerto};
-  });
-  console.log(todosFormat);
+        task_names.push({nroguia: data[i].nroguia,
+          rutcliente:data[i].rutcliente,
+          estado:data[i].estado,
+          pesototal:data[i].pesototal,
+          cliente:data[i].cliente,
+          fechadespacho:data[i].fechadespacho,
+          horaescaneo:data[i].horaescaneo,
+          nrobultos:data[i].nrobultos,
+          producto:data[i].producto,
+          nave:data[i].nave,
+          turno:data[i].turno,
+          puerto:data[i].puerto,
+          });
+          }
+      setData(task_names)
+
+  }
+  const submit = (nRowsSelected) => {
 
 
-  const json2csv = require('json2csv').parse;
-  const csv = json2csv(todosFormat, ['nroguia','rutcliente','estado', 'pesototal','cliente','fechadespacho','fechaescaneo','horaescaneo','nrobultos', 'producto','nave','turno','puerto']);
-  downloadContent("Guias.csv",csv);
+     confirmAlert({
+       title: "😳",
+       message: "¿Estás seguro de eliminar " + nRowsSelected.length +  " datos?",
+       buttons: [
+         {
+      label: "Sí",
+           onClick: (eliminarTodo(nRowsSelected))
+         },
+         {
+           label: "No"
+         }
+       ]
+     });
+   };
+
+const eliminarTodo = async (nros) => {
+var se = [];
+  const po = await DataStore.query(Todo);
+
+  nros.forEach((item, i) => {
+
+    const result = po.filter(p => p.nroguia == item.nroguia).forEach((z, o) => {
+      console.log(z);
+      DataStore.delete(Todo, post => post.nroguia("eq", z.nroguia));
+
+    });
+fetchTodos()
+    // se.push(result)
+});
+// console.log(se);
+// se.forEach((s, i) => {
+// });
 
 }
 
-    const setInput = (key, value, isNumber = false) => {
-        value = (isNumber) ? parseInt(value) : value;
-        setFormState({ ...formState, [key]: value })
+  return (
+    <MaterialTable
+    components={{
+       Toolbar: (props) => (
+         <div
+           style={{
+             backgroundColor: '#b3cce6',
+             display:'flex',
+             justifyContent: "left"
+           }}
+         >
+           <MTableToolbar {...props} />
+         </div>
+       )
+     }}
+      title="Guías  ***"
+      columns={columns}
+      data={data}
+      localization={{
+    body: {
+        emptyDataSourceMessage: "No hay Guías para mostrar",
+        deleteTooltip: 'Eliminar'
+    },
+    header: {
+        actions: 'Seleccionar'
+    },
+    pagination: {
+        labelDisplayedRows: '{from}-{to} de {count}',
+        labelRowsSelect: 'Guías',
+        labelRowsPerPage: 'Guías por página:',
+        firstAriaLabel: 'Primera página',
+        firstTooltip: 'Primera página',
+        previousAriaLabel: 'Anterior',
+        previousTooltip: 'Anterior',
+        nextAriaLabel: 'Siguiente',
+        nextTooltip: 'Siguiente',
+        lastAriaLabel: 'Última página',
+        lastTooltip: 'Última página'
+    },
+    toolbar: {
+        addRemoveColumns: 'Añadir o eliminar',
+        nRowsSelected: '{0} guía(s) seleccionada(s)',
+        showColumnsTitle: 'Ver guías',
+        showColumnsAriaLabel: 'Ver Guías',
+        exportTitle: 'Exportar',
+        exportAriaLabel: 'Exportar',
+        exportName: 'Exportar como CSV',
+        searchTooltip: 'Buscar',
+        searchPlaceholder: 'Buscar'
     }
+}}
 
-    return (
-        <div className="home">
-
-            <div className="home__table" >
-
-            <button onClick={submit}>Borrar Todo</button>
-            <button onClick={exportar}>
-              Exportar
-            </button>
-                <TableContainer component={Paper} >
-                    <Table
-
-                    aria-label="customized table"
-                    >
-                        <TableHead>
-                            <StyledTableRow>
-                                <StyledTableCell >Guía</StyledTableCell>
-                                <StyledTableCell >Rut de Cliente</StyledTableCell>
-                                <StyledTableCell >Estado</StyledTableCell>
-                                <StyledTableCell >Peso Total</StyledTableCell>
-                                <StyledTableCell >Cliente</StyledTableCell>
-                                <StyledTableCell >Fecha de Despacho</StyledTableCell>
-                                <StyledTableCell >Fecha de Escaneo</StyledTableCell>
-                                <StyledTableCell >Hora de Escaneo</StyledTableCell>
-                                <StyledTableCell >Nro de Bultos</StyledTableCell>
-                                <StyledTableCell >Producto</StyledTableCell>
-                                <StyledTableCell >Nave</StyledTableCell>
-                                <StyledTableCell >Turno</StyledTableCell>
-                                <StyledTableCell >Puerto</StyledTableCell>
-
-                            </StyledTableRow>
-                        </TableHead>
-                        <TableBody>
-                            {todos.map((row) => (
-                              <TableRow key={row.nroguia}>
-                              <TableCell >{row.nroguia}</TableCell>
-                              <TableCell >{row.rutcliente}</TableCell>
-                              <TableCell >{row.estado}</TableCell>
-                              <TableCell >{row.pesototal}</TableCell>
-                              <TableCell >{row.cliente}</TableCell>
-                              <TableCell >{row.fechadespacho}</TableCell>
-                              <TableCell >{row.fechaescaneo}</TableCell>
-                              <TableCell >{row.horaescaneo}</TableCell>
-                              <TableCell >{row.nrobultos}</TableCell>
-                              <TableCell >{row.producto}</TableCell>
-                              <TableCell >{row.nave}</TableCell>
-                              <TableCell >{row.turno}</TableCell>
-                              <TableCell >{row.puerto}</TableCell>
-
-                              </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </div>
-    );
+      options={{
+        selection: true,exportButton: true
+      }}
+      actions={[
+        {
+          tooltip: 'Eliminar',
+          icon: 'delete',
+          onClick: (evt, data) => eliminarTodo(data)
+        }]}
+            />
+  )
 }
-
-// export default Home;
