@@ -85,16 +85,13 @@ this.componentDidMount()
    Toolbar: (props) => (
      <div
        style={{
-         backgroundColor: '#ffc680',
-         display:'flex',
-         justifyContent: "left"
-       }}
+         backgroundColor: '#ffc680'       }}
      >
        <MTableToolbar {...props} />
      </div>
    )
           }}
-        title="Productos 1\n\"
+        title="Productos "
         columns={[
             { title: "Nombre", field: "nombre" },
             { title: "Hornada", field: "hornada" },
@@ -148,7 +145,9 @@ this.componentDidMount()
         options={{
           selection: true,
           exportAllData:true,
-          exportButton: true
+          exportButton: true,
+          toolbarButtonAlignment:'left',
+          searchFieldAlignment:'left'
         }}
 
         actions={[
