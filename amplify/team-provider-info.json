@@ -1,38 +1,25 @@
 {
-  "master": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amplifiedtodo-master-93250-authRole",
-      "UnauthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-master-93250-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-master-93250-authRole",
+      "AuthRoleName": "amplify-amplifiedtodo-dev-192023-authRole",
+      "UnauthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-dev-192023-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-dev-192023-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-amplifiedtodo-master-93250-deployment",
-      "UnauthRoleName": "amplify-amplifiedtodo-master-93250-unauthRole",
-      "StackName": "amplify-amplifiedtodo-master-93250",
-      "StackId": "arn:aws:cloudformation:us-east-1:289162428673:stack/amplify-amplifiedtodo-master-93250/62dd0590-1d1a-11ec-8b32-0ecb9fa14949",
-      "AmplifyAppId": "d303ciqglpj70d"
-    }
-  },
-  "staging": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-amplifiedtodo-staging-11559-authRole",
-      "UnauthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-staging-11559-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::289162428673:role/amplify-amplifiedtodo-staging-11559-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-amplifiedtodo-staging-11559-deployment",
-      "UnauthRoleName": "amplify-amplifiedtodo-staging-11559-unauthRole",
-      "StackName": "amplify-amplifiedtodo-staging-11559",
-      "StackId": "arn:aws:cloudformation:us-east-1:289162428673:stack/amplify-amplifiedtodo-staging-11559/2e17e000-0154-11ec-80fe-12b94cd95a93",
+      "DeploymentBucketName": "amplify-amplifiedtodo-dev-192023-deployment",
+      "UnauthRoleName": "amplify-amplifiedtodo-dev-192023-unauthRole",
+      "StackName": "amplify-amplifiedtodo-dev-192023",
+      "StackId": "arn:aws:cloudformation:us-east-1:289162428673:stack/amplify-amplifiedtodo-dev-192023/e49ee6d0-585b-11ec-a0c7-122722027b1f",
       "AmplifyAppId": "d303ciqglpj70d"
     },
     "categories": {
-      "auth": {
-        "amplifiedtodoa0ecdc4a": {}
-      },
       "hosting": {
         "amplifyhosting": {
           "appId": "d303ciqglpj70d",
           "type": "manual"
         }
+      },
+      "auth": {
+        "amplifiedtodoa0ecdc4a": {}
       }
     }
   }
