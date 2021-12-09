@@ -3,7 +3,7 @@ import React from 'react';
 import {Drawer,Divider} from '@material-ui/core'
 import {makeStyles} from '@material-ui/styles';
 import List from './List'
-import img from '../../assets/img/inicial.png'
+import img from '../../assets/img/io.png'
 
 //styles
 const styles = makeStyles(theme => ({
@@ -16,8 +16,8 @@ const styles = makeStyles(theme => ({
     },
     toolbar: 56,
     logo:{
-        width: 60,
-        height: 60,
+        width: 102.4,
+        height: 76.8,
         marginLeft: 80
     }
 }))

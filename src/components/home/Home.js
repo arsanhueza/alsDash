@@ -10,11 +10,21 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = { todos:[] }
+    this.fetchTodo()
   }
 
+async componentWillMount(){
+
+this.fetchTodo()
+
+}
   async componentDidMount(){
+
+    this.fetchTodo()
+  }
+
+  fetchTodo = async() =>{
     const data = await DataStore.query(Todo);
     var task_names = [];
 
@@ -30,14 +40,13 @@ class Home extends Component {
           horaescaneo:data[i].horaescaneo,
           nrobultos:data[i].nrobultos,
           producto:data[i].producto,
-          nave:data[i].nave,
           turno:data[i].turno,
-          puerto:data[i].puerto,
           id: data[i].id
           });
           }
 
     this.setState( { todos: task_names } )
+
   }
 
    eliminarTodo = async (nros) => {
@@ -50,26 +59,25 @@ class Home extends Component {
         DataStore.delete(Todo, post => post.id("eq", z.id));
 
       });
-this.componentDidMount()
+this.fetchTodo()
   });
-
   }
-
 
   render() {
     return (
+
       <MaterialTable
       components={{
    Toolbar: (props) => (
      <div
        style={{
-         backgroundColor: '#b3cce6'
+         backgroundColor: '#ffa500'
               }}
      >
        <MTableToolbar {...props} />
      </div>
    )
-          }}
+      }}
         title="Guías  "
         columns={[
             { title: "Nº Guía", field: "nroguia" },
@@ -81,9 +89,7 @@ this.componentDidMount()
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Nº Bultos", field: "nrobultos" },
             { title: "Producto", field: "producto" },
-            { title: "Nave", field: "nave" },
             { title: "Turno", field: "turno" },
-            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 

@@ -4,7 +4,7 @@ import { UISref} from '@uirouter/react';
 import {List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 //icons
 import HomeIcon from '@material-ui/icons/Assignment';
-import InfoIcon from '@material-ui/icons/CheckBox';
+import InfoIcon from '@material-ui/icons/AssignmentTurnedIn';
 import ExportIcon from '@material-ui/icons/CloudDownload';
 import { AmplifyAuthenticator,withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
