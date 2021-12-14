@@ -14,8 +14,9 @@ import Amplify from 'aws-amplify';
 import { AmplifyAuthenticator,withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import awsExports from "./aws-exports";
 
-Amplify.configure(awsExports);
+import { AmplifyTheme } from 'aws-amplify';
 
+Amplify.configure(awsExports);
 
 //states de ruta
 const states = [
@@ -47,5 +48,6 @@ const App = () => {
     </ThemeProvider>
   )
 }
+
 
 export default withAuthenticator(App,true);

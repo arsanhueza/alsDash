@@ -3,7 +3,7 @@ import React from 'react';
 import {Drawer,Divider} from '@material-ui/core'
 import {makeStyles} from '@material-ui/styles';
 import List from './List'
-import img from '../../assets/img/io.png'
+import img from '../../assets/img/inicial.png'
 
 //styles
 const styles = makeStyles(theme => ({
