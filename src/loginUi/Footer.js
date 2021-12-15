@@ -5,7 +5,7 @@ export function Footer() {
 
   return (
     <Flex justifyContent="center" padding={tokens.space.medium}>
-      <Text>&copy; All Rights Reserved</Text>
+      <Text>&copy; Todos los derechos reservados</Text>
     </Flex>
   );
 }
