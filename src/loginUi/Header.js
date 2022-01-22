@@ -6,8 +6,8 @@ export function Header() {
   return (
     <Image
       alt="logo"
-      src="https://alsgroup.mn/wp-content/uploads/2018/01/ShareHolderInfo-GeneralInfo.png"
-      // padding={tokens.space.large}
+      src="https://www.alsglobal.es/static/img/logo_icon@2x.png"
+       padding={tokens.space.medium}
     />
   );
 }

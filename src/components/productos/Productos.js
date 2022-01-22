@@ -120,10 +120,14 @@ this.componentDidMount()
           searchPlaceholder: 'Buscar'
       }
   }}
+
         options={{
           selection: true,
           exportAllData:true,
-          exportButton: true,
+          exportButton: {
+            csv: true,
+            pdf: false
+          },
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
           pageSize:10,
@@ -133,6 +137,12 @@ this.componentDidMount()
 
 
         }}
+
+        localization={{
+             toolbar: {
+               exportCSVName: "Exportar xls",
+             }
+           }}
 
         actions={[
           {

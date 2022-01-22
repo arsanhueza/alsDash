@@ -134,7 +134,10 @@ this.fetchTodo()
   }}
         options={{
           selection: true,
-          exportButton: true,
+          exportButton: {
+            csv: true,
+            pdf: false
+          },
           exportAllData:true,
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
@@ -144,6 +147,12 @@ this.fetchTodo()
           grouping: true
 
         }}
+
+        localization={{
+             toolbar: {
+               exportCSVName: "Exportar xls",
+             }
+           }}
 
         actions={[
           {
