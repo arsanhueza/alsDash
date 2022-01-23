@@ -16,6 +16,8 @@
     "@testing-library/user-event": "^12.1.10",
     "@uirouter/react": "^1.0.7",
     "aws-amplify": "^4.3.0",
+    "export-from-json": "^1.5.1",
+    "json-as-xlsx": "^2.3.10",
     "json2csv": "^5.0.6",
     "material-table": "1.69.3",
     "npm": "^7.24.1",

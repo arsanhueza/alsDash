@@ -5,6 +5,7 @@ import { Todo } from '../../models';
 import MaterialTable from "material-table";
 import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
+import exportFromJSON from 'export-from-json'
 
 class Home extends Component {
 
@@ -13,6 +14,8 @@ class Home extends Component {
     this.state = { todos:[] }
     this.fetchTodo()
   }
+
+
 
 async componentWillMount(){
 
@@ -23,6 +26,8 @@ this.fetchTodo()
 
     this.fetchTodo()
   }
+
+
 
   fetchTodo = async() =>{
     const data = await DataStore.query(Todo);
@@ -48,6 +53,20 @@ this.fetchTodo()
     this.setState( { todos: task_names } )
 
   }
+
+  ExportToExcel = () => {
+  const fileName = 'Guias'
+  const exportType = 'xls'
+  const data = this.state.todos
+    exportFromJSON({ data, fileName, exportType })
+  }
+
+  ExportToExcelSelection = (data) => {
+  const fileName = 'Guias seleccionadas'
+  const exportType = 'xls'
+    exportFromJSON({ data, fileName, exportType })
+  }
+
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -78,7 +97,7 @@ this.fetchTodo()
      </div>
    )
       }}
-        title="Guías  "
+        title="Guías"
         columns={[
             { title: "Nº Guía", field: "nroguia" },
             { title: "Rut Cliente", field: "rutcliente" },
@@ -134,10 +153,7 @@ this.fetchTodo()
   }}
         options={{
           selection: true,
-          exportButton: {
-            csv: true,
-            pdf: false
-          },
+          exportButton: false,
           exportAllData:true,
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
@@ -148,18 +164,30 @@ this.fetchTodo()
 
         }}
 
-        localization={{
-             toolbar: {
-               exportCSVName: "Exportar xls",
-             }
-           }}
+        // localization={{
+        //      toolbar: {
+        //        exportCSVName: "Exportar xls",
+        //      }
+        //    }}
 
         actions={[
           {
             tooltip: 'Eliminar',
             icon: 'delete',
             onClick: (event,dato) => {this.eliminarTodo(dato)}
-          }
+          },
+          {
+          icon: 'save_alt',
+          tooltip: 'Exportar selección',
+          onClick: (event,dato) => {this.ExportToExcelSelection(dato)}
+},
+{
+          icon: 'save_alt',
+          tooltip: 'Exportar todo',
+          isFreeAction:true,
+          onClick: (event) => {this.ExportToExcel()}}
+
+
   ]}
               />
         );

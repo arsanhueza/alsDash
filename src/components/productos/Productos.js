@@ -5,6 +5,7 @@ import { Producto } from '../../models';
 import MaterialTable from "material-table";
 import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
+import exportFromJSON from 'export-from-json'
 
 class Productos extends Component {
 
@@ -36,6 +37,21 @@ class Productos extends Component {
 
     this.setState( { todos: task_names } )
   }
+
+
+  ExportToExcel = () => {
+  const fileName = 'Producto'
+  const exportType = 'xls'
+  const data = this.state.todos
+    exportFromJSON({ data, fileName, exportType })
+  }
+
+  ExportToExcelSelection = (data) => {
+  const fileName = 'Productos seleccionados'
+  const exportType = 'xls'
+    exportFromJSON({ data, fileName, exportType })
+  }
+
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -123,11 +139,8 @@ this.componentDidMount()
 
         options={{
           selection: true,
-          exportAllData:true,
-          exportButton: {
-            csv: true,
-            pdf: false
-          },
+          exportAllData:false,
+          exportButton: false,
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
           pageSize:10,
@@ -135,21 +148,26 @@ this.componentDidMount()
           padding:'dense',
           grouping: true
 
-
         }}
-
-        localization={{
-             toolbar: {
-               exportCSVName: "Exportar xls",
-             }
-           }}
 
         actions={[
           {
             tooltip: 'Eliminar',
             icon: 'delete',
             onClick: (event,dato) => {this.eliminarTodo(dato)}
-          }
+          },
+          {
+          icon: 'save_alt',
+          tooltip: 'Exportar selección',
+          onClick: (event,dato) => {this.ExportToExcelSelection(dato)}
+},
+{
+          icon: 'save_alt',
+          tooltip: 'Exportar todo',
+          isFreeAction:true,
+          onClick: (event) => {this.ExportToExcel()}}
+
+
   ]}
               />
         );
