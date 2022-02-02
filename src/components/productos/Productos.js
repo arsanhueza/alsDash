@@ -36,6 +36,7 @@ class Productos extends Component {
           }
 
     this.setState( { todos: task_names } )
+
   }
 
 
@@ -43,13 +44,26 @@ class Productos extends Component {
   const fileName = 'Producto'
   const exportType = 'xls'
   const data = this.state.todos
-    exportFromJSON({ data, fileName, exportType })
+
+
+    exportFromJSON({ data, fileName, exportType})
   }
 
   ExportToExcelSelection = (data) => {
   const fileName = 'Productos seleccionados'
   const exportType = 'xls'
-    exportFromJSON({ data, fileName, exportType })
+
+  const dataFormateada = JSON.stringify(this.state.todos, function(key, value) {
+
+     if(value === null) {
+         return "";
+     }})
+
+
+
+  // const dataFormateada = data.replace(/\:null/gi, null);
+
+    exportFromJSON({ data, fileName, exportType})
   }
 
 
