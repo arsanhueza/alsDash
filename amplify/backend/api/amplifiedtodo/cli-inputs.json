@@ -18,6 +18,6 @@
       }
     },
     "apiName": "amplifiedtodo",
-    "gqlSchemaPath": "/tmp/amplify-d5007932-0294-46e7-abf8-e84b0eb55042/amplify/backend/api/amplifiedtodo/schema.graphql"
+    "gqlSchemaPath": "/tmp/amplify-0b135a14-62df-437a-8f74-074184c06b2f/amplify/backend/api/amplifiedtodo/schema.graphql"
   }
 }
