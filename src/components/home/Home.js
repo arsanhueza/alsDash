@@ -5,16 +5,31 @@ import { Todo } from '../../models';
 import MaterialTable from "material-table";
 import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
+import exportFromJSON from 'export-from-json'
 
 class Home extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = { todos:[] }
+    this.fetchTodo()
   }
 
+
+
+async componentWillMount(){
+
+this.fetchTodo()
+
+}
   async componentDidMount(){
+
+    this.fetchTodo()
+  }
+
+
+
+  fetchTodo = async() =>{
     const data = await DataStore.query(Todo);
     var task_names = [];
 
@@ -30,15 +45,28 @@ class Home extends Component {
           horaescaneo:data[i].horaescaneo,
           nrobultos:data[i].nrobultos,
           producto:data[i].producto,
-          nave:data[i].nave,
           turno:data[i].turno,
-          puerto:data[i].puerto,
           id: data[i].id
           });
           }
 
     this.setState( { todos: task_names } )
+
   }
+
+  ExportToExcel = () => {
+  const fileName = 'Guias'
+  const exportType = 'xls'
+  const data = this.state.todos
+    exportFromJSON({ data, fileName, exportType })
+  }
+
+  ExportToExcelSelection = (data) => {
+  const fileName = 'Guias seleccionadas'
+  const exportType = 'xls'
+    exportFromJSON({ data, fileName, exportType })
+  }
+
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -50,27 +78,26 @@ class Home extends Component {
         DataStore.delete(Todo, post => post.id("eq", z.id));
 
       });
-this.componentDidMount()
+this.fetchTodo()
   });
-
   }
-
 
   render() {
     return (
+
       <MaterialTable
       components={{
    Toolbar: (props) => (
      <div
        style={{
-         backgroundColor: '#b3cce6'
+         backgroundColor: '#8FACCC'
               }}
      >
        <MTableToolbar {...props} />
      </div>
    )
-          }}
-        title="Guías  "
+      }}
+        title="Guías"
         columns={[
             { title: "Nº Guía", field: "nroguia" },
             { title: "Rut Cliente", field: "rutcliente" },
@@ -81,9 +108,7 @@ this.componentDidMount()
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Nº Bultos", field: "nrobultos" },
             { title: "Producto", field: "producto" },
-            { title: "Nave", field: "nave" },
             { title: "Turno", field: "turno" },
-            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 
@@ -128,7 +153,7 @@ this.componentDidMount()
   }}
         options={{
           selection: true,
-          exportButton: true,
+          exportButton: false,
           exportAllData:true,
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
@@ -139,12 +164,30 @@ this.componentDidMount()
 
         }}
 
+        // localization={{
+        //      toolbar: {
+        //        exportCSVName: "Exportar xls",
+        //      }
+        //    }}
+
         actions={[
           {
             tooltip: 'Eliminar',
             icon: 'delete',
             onClick: (event,dato) => {this.eliminarTodo(dato)}
-          }
+          },
+          {
+          icon: 'save_alt',
+          tooltip: 'Exportar selección',
+          onClick: (event,dato) => {this.ExportToExcelSelection(dato)}
+},
+{
+          icon: 'save_alt',
+          tooltip: 'Exportar todo',
+          isFreeAction:true,
+          onClick: (event) => {this.ExportToExcel()}}
+
+
   ]}
               />
         );

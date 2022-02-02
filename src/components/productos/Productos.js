@@ -5,6 +5,7 @@ import { Producto } from '../../models';
 import MaterialTable from "material-table";
 import MTableToolbar from "material-table/dist/components/m-table-toolbar";
 import { confirmAlert } from "react-confirm-alert";
+import exportFromJSON from 'export-from-json'
 
 class Productos extends Component {
 
@@ -30,14 +31,41 @@ class Productos extends Component {
           fechaescaneo:data[i].fechaescaneo,
           horaescaneo:data[i].horaescaneo,
           turno:data[i].turno,
-          nave:data[i].nave,
-          puerto:data[i].puerto,
           id: data[i].id
           });
           }
 
     this.setState( { todos: task_names } )
+
   }
+
+
+  ExportToExcel = () => {
+  const fileName = 'Producto'
+  const exportType = 'xls'
+  const data = this.state.todos
+
+
+    exportFromJSON({ data, fileName, exportType})
+  }
+
+  ExportToExcelSelection = (data) => {
+  const fileName = 'Productos seleccionados'
+  const exportType = 'xls'
+
+  const dataFormateada = JSON.stringify(this.state.todos, function(key, value) {
+
+     if(value === null) {
+         return "";
+     }})
+
+
+
+  // const dataFormateada = data.replace(/\:null/gi, null);
+
+    exportFromJSON({ data, fileName, exportType})
+  }
+
 
    eliminarTodo = async (nros) => {
   var se = [];
@@ -62,13 +90,13 @@ this.componentDidMount()
    Toolbar: (props) => (
      <div
        style={{
-         backgroundColor: '#ffc680'       }}
+         backgroundColor: '#8FACCC'}}
      >
        <MTableToolbar {...props} />
      </div>
    )
           }}
-        title="Productos "
+        title="Productos"
         columns={[
             { title: "Nombre", field: "nombre" },
             { title: "Hornada", field: "hornada" },
@@ -80,8 +108,6 @@ this.componentDidMount()
             { title: "Fecha escaneo", field: "fechaescaneo" },
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Turno", field: "turno" },
-            { title: "Nave", field: "nave" },
-            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 
@@ -124,17 +150,17 @@ this.componentDidMount()
           searchPlaceholder: 'Buscar'
       }
   }}
+
         options={{
           selection: true,
-          exportAllData:true,
-          exportButton: true,
+          exportAllData:false,
+          exportButton: false,
           toolbarButtonAlignment:'left',
           searchFieldAlignment:'left',
           pageSize:10,
           pageSizeOptions:[5,10,20,this.state.todos.length],
           padding:'dense',
           grouping: true
-
 
         }}
 
@@ -143,7 +169,19 @@ this.componentDidMount()
             tooltip: 'Eliminar',
             icon: 'delete',
             onClick: (event,dato) => {this.eliminarTodo(dato)}
-          }
+          },
+          {
+          icon: 'save_alt',
+          tooltip: 'Exportar selección',
+          onClick: (event,dato) => {this.ExportToExcelSelection(dato)}
+},
+{
+          icon: 'save_alt',
+          tooltip: 'Exportar todo',
+          isFreeAction:true,
+          onClick: (event) => {this.ExportToExcel()}}
+
+
   ]}
               />
         );

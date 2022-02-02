@@ -16,9 +16,9 @@ const styles = makeStyles(theme => ({
     },
     toolbar: 56,
     logo:{
-        width: 60,
-        height: 60,
-        marginLeft: 80
+        width: 128.0,
+        height: 128.0,
+        marginLeft: 53
     }
 }))
 

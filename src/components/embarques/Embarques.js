@@ -26,10 +26,8 @@ class Embarques extends Component {
     { title: "Hora escaneo", field: "horaescaneo" },
     { title: "Nº Bultos", field: "nrobultos" },
     { title: "Producto", field: "producto" },
-    { title: "Nave", field: "nave" },
-    { title: "Turno", field: "turno" },
-    { title: "Puerto", field: "puerto" }
-  ];
+    { title: "Turno", field: "turno" }
+    ];
 
   async componentDidMount(){
     const data = await DataStore.query(Todo);
@@ -47,9 +45,7 @@ class Embarques extends Component {
           horaescaneo:data[i].horaescaneo,
           nrobultos:data[i].nrobultos,
           producto:data[i].producto,
-          nave:data[i].nave,
           turno:data[i].turno,
-          puerto:data[i].puerto,
           });
           }
 
@@ -109,10 +105,8 @@ this.componentDidMount()
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Nº Bultos", field: "nrobultos" },
             { title: "Producto", field: "producto" },
-            { title: "Nave", field: "nave" },
-            { title: "Turno", field: "turno" },
-            { title: "Puerto", field: "puerto" }
-]}
+            { title: "Turno", field: "turno" }
+                  ]}
 
         data={this.state.todos}
         localization={{

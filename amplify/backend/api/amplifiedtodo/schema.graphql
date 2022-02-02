@@ -31,4 +31,4 @@ type Todo @model @auth(rules: [{allow: public}]) {
   horaescaneo: String
   puerto: String
 }
- 
+   
