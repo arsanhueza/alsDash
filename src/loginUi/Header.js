@@ -5,9 +5,9 @@ export function Header() {
 
   return (
     <Image
-      alt="logo"
-      src="https://www.alsglobal.es/static/img/logo_icon@2x.png"
-       padding={tokens.space.medium}
+      alt=""
+      src=""
+       padding={tokens.space.small}
     />
   );
 }
