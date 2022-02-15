@@ -46,6 +46,8 @@ this.fetchTodo()
           nrobultos:data[i].nrobultos,
           producto:data[i].producto,
           turno:data[i].turno,
+          nave:data[i].nave,
+          puerto:data[i].puerto,
           id: data[i].id
           });
           }
@@ -109,6 +111,8 @@ this.fetchTodo()
             { title: "Nº Bultos", field: "nrobultos" },
             { title: "Producto", field: "producto" },
             { title: "Turno", field: "turno" },
+            { title: "Nave", field: "nave" },
+            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 

@@ -31,6 +31,8 @@ class Productos extends Component {
           fechaescaneo:data[i].fechaescaneo,
           horaescaneo:data[i].horaescaneo,
           turno:data[i].turno,
+          nave:data[i].nave,
+          puerto:data[i].puerto,
           id: data[i].id
           });
           }
@@ -108,6 +110,8 @@ this.componentDidMount()
             { title: "Fecha escaneo", field: "fechaescaneo" },
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Turno", field: "turno" },
+            { title: "Nave", field: "nave" },
+            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 
