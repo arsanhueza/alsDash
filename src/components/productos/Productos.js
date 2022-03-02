@@ -110,8 +110,8 @@ this.componentDidMount()
             { title: "Fecha escaneo", field: "fechaescaneo" },
             { title: "Hora escaneo", field: "horaescaneo" },
             { title: "Turno", field: "turno" },
-      //      { title: "Nave", field: "nave" },
-        //    { title: "Puerto", field: "puerto" },
+            { title: "Nave", field: "nave" },
+            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 

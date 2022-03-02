@@ -111,8 +111,8 @@ this.fetchTodo()
             { title: "Nº Bultos", field: "nrobultos" },
             { title: "Producto", field: "producto" },
             { title: "Turno", field: "turno" },
-        //    { title: "Nave", field: "nave" },
-          //  { title: "Puerto", field: "puerto" },
+            { title: "Nave", field: "nave" },
+            { title: "Puerto", field: "puerto" },
             { title: "ID", field: "id" }
 ]}
 
